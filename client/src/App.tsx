@@ -4,7 +4,7 @@ function App() {
 
   return (
     <div className="app flex">
-      <img src="../public/background.png" alt="" className="fullscreen-img" />
+      <img src="/background.png" alt="" className="fullscreen-img" />
       <div className="help-section flex flex-row">
         <div className="post-music">
           <div className="music">
