@@ -3,7 +3,10 @@ import './App.css'
 function App() {
 
   return (
-    <div className="app flex">
+    <div className="app flex flex-col bg-cyan-300 border-red-500">
+      <h1 className="text-3xl font-bold underline border-red-500 border-2">
+        Hello world!
+      </h1>
       <img src="/background.png" alt="" className="fullscreen-img" />
       <div className="help-section flex flex-row">
         <div className="post-music">
@@ -31,7 +34,7 @@ function App() {
           <p>Everybody is different</p>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
