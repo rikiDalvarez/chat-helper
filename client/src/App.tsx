@@ -7,7 +7,7 @@ function App() {
       <img src="/background.png" alt="" className="fullscreen-img" />
       <h1 className="absolute top-0 left-0 w-full h-full text-center text-white text-4xl flex items-center justify-center"> Hello Spider Man</h1>
       <div className="help-section flex flex-row">
-        <div className="post-music">
+        <div className="post-music bg-red-300">
           <div className="music">
             <h1>kiss me</h1>
           </div>
@@ -15,7 +15,7 @@ function App() {
             <h1>Post on the internet</h1>
           </div>
         </div>
-        <div className="login">
+        <div className="login bg-indigo-400">
           <h1>Login or talk with us directly</h1>
           <button onClick={() => console.log("hello world")} >New user? register</button>
           <label htmlFor="email">
@@ -27,7 +27,7 @@ function App() {
           <button>Login</button>
           <button>Talk</button>
         </div>
-        <div className="painting-phrase">
+        <div className="painting-phrase bg-emerald-300">
           <img src="" alt="an image here" />
           <p>Everybody is different</p>
         </div>
