@@ -3,11 +3,9 @@ import './App.css'
 function App() {
 
   return (
-    <div className="app flex flex-col bg-cyan-300 border-red-500">
-      <h1 className="text-3xl font-bold underline border-red-500 border-2">
-        Hello world!
-      </h1>
+    <div className="app flex flex-col">
       <img src="/background.png" alt="" className="fullscreen-img" />
+      <h1 className="absolute top-0 left-0 w-full h-full text-center text-white text-4xl flex items-center justify-center"> Hello Spider Man</h1>
       <div className="help-section flex flex-row">
         <div className="post-music">
           <div className="music">
@@ -34,7 +32,7 @@ function App() {
           <p>Everybody is different</p>
         </div>
       </div>
-    </div >
+    </div>
   )
 }
 
