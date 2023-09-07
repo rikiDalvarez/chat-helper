@@ -43,27 +43,30 @@ function App() {
       <div className="help-section flex flex-row">
         <div className="post-music bg-red-300">
           <div className="music">
-            <h1>kiss me</h1>
+            <h1 className='m-2 text-4xl p-2'>kiss me</h1>
           </div>
           <div className="post">
-            <h1>Post on the internet</h1>
+            <h1 className='m-2 text-4xl p-2'>Post on the internet</h1>
           </div>
         </div>
-        <div className="login bg-indigo-400">
-          <h1>Login or talk with us directly</h1>
-          <button onClick={() => console.log("hello world")} >New user? register</button>
+        <div className="login bg-indigo-400 flex flex-col items-center">
+          <h1 className='m-2 text-4xl p-2'>Login or talk with us directly</h1>
+          <button className="p-2 m-2" onClick={() => console.log("hello world")} >New user? register</button>
           <label htmlFor="email">
-            <input type="text" placeholder='email' />
+            <input className='p-2 m-2' type="text" placeholder='email' />
           </label>
           <label htmlFor="password">
-            <input type="passworld" placeholder='passworld' />
+            <input className='p-2 m-2' type="passworld" placeholder='passworld' />
           </label>
-          <button>Login</button>
-          <button>Talk</button>
+          <div>
+            <button className="p-2 m-2">Login</button>
+            <button className="p-2 m-2">Talk</button>
+
+          </div>
         </div>
         <div className="painting-phrase bg-emerald-300">
           <img src="" alt="an image here" />
-          <p>Everybody is different</p>
+          <p className='m-2 text-4xl p-2'>Everybody is different</p>
         </div>
       </div>
     </div>
