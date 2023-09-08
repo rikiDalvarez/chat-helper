@@ -50,7 +50,7 @@ function App() {
         <>
           <img src="/background.png" alt="" className="fullscreen-img mb-4 border-2  rounded-lg shadow-xl" />
           <h1
-            className="absolute top-0 left-0 w-full h-full text-center text-white text-4xl flex items-center justify-center  "> Hello {name}</h1>
+            className="absolute top-0 left-0 w-full mt-80 text-center text-white text-4xl flex items-center justify-center  "> Hello {name}</h1>
           <div className="help-section flex flex-row">
             <div className="post-music bg-lime-100  rounded-lg m-4 border-2 shadow-xl">
               <div className="music">
@@ -81,8 +81,11 @@ function App() {
               <img src="" alt="an image here" />
               <p className='m-2 text-4xl p-2'>Everybody is different</p>
             </div>
+
           </div>
-        </>)}
+        </>
+      )}
+
     </div>
   )
 }
