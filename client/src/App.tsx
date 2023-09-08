@@ -29,7 +29,7 @@ function App() {
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        setIsLoading(false); // Set isLoading to false when data is fetched
+        setIsLoading(false);
       }
     };
 
@@ -48,33 +48,36 @@ function App() {
         </div>
       ) : (
         <>
-          <img src="/background.png" alt="" className="fullscreen-img" />
-          <h1 className="absolute top-0 left-0 w-full h-full text-center text-white text-4xl flex items-center justify-center"> Hello {name}</h1>
+          <img src="/background.png" alt="" className="fullscreen-img mb-4 border-2  rounded-lg shadow-xl" />
+          <h1
+            className="absolute top-0 left-0 w-full h-full text-center text-white text-4xl flex items-center justify-center  "> Hello {name}</h1>
           <div className="help-section flex flex-row">
-            <div className="post-music bg-red-300">
+            <div className="post-music bg-lime-100  rounded-lg m-4 border-2 shadow-xl">
               <div className="music">
                 <h1 className='m-2 text-4xl p-2'>kiss me</h1>
               </div>
               <div className="post">
                 <h1 className='m-2 text-4xl p-2'>Post on the internet</h1>
+                <input type="text" />
               </div>
             </div>
-            <div className="login bg-indigo-400 flex flex-col items-center">
+            <form className="login bg-rose-50  rounded-lg m-4 border-2 shadow-xl flex flex-col items-center">
               <h1 className='m-2 text-4xl p-2'>Login or talk with us directly</h1>
               <button className="p-2 m-2" onClick={() => console.log("hello world")} >New user? register</button>
               <label htmlFor="email">
-                <input className='p-2 m-2' type="text" placeholder='email' />
+                <input className='p-2 m-2 border-2  rounded-lg' id="email" type="text" placeholder='email' />
               </label>
               <label htmlFor="password">
-                <input className='p-2 m-2' type="passworld" placeholder='passworld' />
+                <input className='p-2 m-2 border-2  rounded-lg' id="pssword" type="password" placeholder='passworld' />
               </label>
               <div>
                 <button className="p-2 m-2">Login</button>
                 <button className="p-2 m-2">Talk</button>
 
               </div>
-            </div>
-            <div className="painting-phrase bg-emerald-300">
+
+            </form>
+            <div className="painting-phrase bg-lime-100  rounded-lg m-4 border-2 shadow-xl">
               <img src="" alt="an image here" />
               <p className='m-2 text-4xl p-2'>Everybody is different</p>
             </div>
