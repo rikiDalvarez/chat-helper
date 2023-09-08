@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 
 function App() {
-  const [name, setName] = useState();
+  const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   const url = 'https://superhero-search.p.rapidapi.com/api/heroes';
@@ -56,9 +56,11 @@ function App() {
               <div className="music">
                 <h1 className='m-2 text-4xl p-2'>kiss me</h1>
               </div>
-              <div className="post">
-                <h1 className='m-2 text-4xl p-2'>Post on the internet</h1>
-                <input type="text" />
+              <div className="post border-2 p-4 m-4">
+                <h3 className='m-2 text-4xl p-2'>Express yourself</h3>
+                <textarea id="freeform" name="freeform" rows={5} cols={36}>
+                  Enter text here...
+                </textarea>
               </div>
             </div>
             <form className="login bg-rose-50  rounded-lg m-4 border-2 shadow-xl flex flex-col items-center">
