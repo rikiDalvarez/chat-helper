@@ -4,38 +4,7 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [name, setName] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-
-  const url = 'https://superhero-search.p.rapidapi.com/api/heroes';
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': import.meta.env.VITE_REACT_APP_RAPIDAPI_KEY,
-      'X-RapidAPI-Host': 'superhero-search.p.rapidapi.com'
-    }
-  };
-
-  useEffect(() => {
-    const fetchDataFromAPI = async () => {
-      try {
-        const response = await fetch(url, options);
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data)
-          setName(data[0].name);
-        } else {
-          console.error('Failed to fetch data:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchDataFromAPI();
-  }, [])
-
+  const [isLoading, setIsLoading] = useState(false);
 
 
 
@@ -48,19 +17,27 @@ function App() {
         </div>
       ) : (
         <>
+          <p> This chat is here to help and inspire, we want to support you thru whatever you are passing.</p>
           <img src="/background.png" alt="" className="fullscreen-img mb-4 border-2  rounded-lg shadow-xl" />
           <h1
-            className="absolute top-0 left-0 w-full mt-80 text-center text-white text-4xl flex items-center justify-center  "> Hello {name}</h1>
+            className="absolute top-0 left-0 w-full mt-80 text-center text-white text-4xl flex items-center justify-center  "> Hello Peter-Pan</h1>
           <div className="help-section flex flex-row">
             <div className="post-music bg-lime-100  rounded-lg m-4 border-2 shadow-xl">
-              <div className="music">
-                <h1 className='m-2 text-4xl p-2'>kiss me</h1>
+              <div className="music flex flex-col mt-6 items-center">
+                {/* TODO add personalization, user can change the music or set for his mood */}
+                <audio controls className="rounded-lg"  >
+                  <source src="/drdre-eminem.mp3" type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
               </div>
-              <div className="post border-2 p-4 m-4">
+              <div className="post border-2 rounded-lg  shadow-xl p-4 m-4">
+                {/* TODO add information when highlighted explain what it does */}
                 <h3 className='m-2 text-4xl p-2'>Express yourself</h3>
-                <textarea id="freeform" name="freeform" rows={5} cols={36}>
-                  Enter text here...
+                <textarea placeholder="enter text here..." id="freeform" name="freeform" rows={5} cols={36}>
                 </textarea>
+                {/* TODO create a post on our twitter */}
+                {/* TODO create filtering and mpderation */}
+                <button className="p-2 m-2">Post</button>
               </div>
             </div>
             <form className="login bg-rose-50  rounded-lg m-4 border-2 shadow-xl flex flex-col items-center">
