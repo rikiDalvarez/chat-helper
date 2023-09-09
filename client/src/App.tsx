@@ -20,11 +20,12 @@ function App() {
           <p> This chat is here to help and inspire, we want to support you thru whatever you are passing.</p>
           <img src="/background.png" alt="" className="fullscreen-img mb-4 border-2  rounded-lg shadow-xl" />
           <h1
-            className="absolute top-0 left-0 w-full mt-80 text-center text-white text-4xl flex items-center justify-center  "> Hello Peter-Pan</h1>
+            className="absolute top-0 left-0 w-full mt-80 text-center text-white text-4xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]  "> Hello Peter-Pan</h1>
           <div className="help-section flex flex-row">
             <div className="post-music bg-lime-100  rounded-lg m-4 border-2 shadow-xl">
               <div className="music flex flex-col mt-6 items-center">
                 {/* TODO add personalization, user can change the music or set for his mood */}
+                {/* TODO on click of the div that contains audio brings the client to audio library with soothing and inspiring songs */}
                 <audio controls className="rounded-lg"  >
                   <source src="/drdre-eminem.mp3" type="audio/mpeg" />
                   Your browser does not support the audio element.
@@ -40,8 +41,9 @@ function App() {
                 <button className="p-2 m-2">Post</button>
               </div>
             </div>
-            <form className="login bg-rose-50  rounded-lg m-4 border-2 shadow-xl flex flex-col items-center">
-              <h1 className='m-2 text-4xl p-2'>Login or talk with us directly</h1>
+            <form className="login bg-rose-50  rounded-lg m-4 border-2 shadow-xl flex flex-col items-center min">
+              <button className="p-2 m-4 bg-pink-400">Talk right now</button>
+              <h1 className='m-2 text-4xl p-2'>Login</h1>
               <button className="p-2 m-2" onClick={() => console.log("hello world")} >New user? register</button>
               <label htmlFor="email">
                 <input className='p-2 m-2 border-2  rounded-lg' id="email" type="text" placeholder='email' />
@@ -49,17 +51,22 @@ function App() {
               <label htmlFor="password">
                 <input className='p-2 m-2 border-2  rounded-lg' id="pssword" type="password" placeholder='passworld' />
               </label>
-              <div>
-                <button className="p-2 m-2">Login</button>
-                <button className="p-2 m-2">Talk</button>
 
-              </div>
+              <button className="p-2 m-2">Login</button>
+
+
+
 
             </form>
-            <div className="painting-phrase bg-lime-100  rounded-lg m-4 border-2 shadow-xl">
-              <img src="" alt="an image here" />
-              <p className='m-2 text-4xl p-2'>Everybody is different</p>
+            <div className="painting-phrase bg-lime-100 rounded-lg m-4 border-2 shadow-xl flex flex-col items-center justify-center">
+              {/* TODO on click of img, takes client to a library of soothing and inspiring paintings */}
+              <img src="/kandinsky.png" alt="an image here" className="mt-4 mr-8 ml-8 h-72 rounded-lg" />
+
+              {/* TODO on click of phrase takes client to the book related (maybe only book quotes?)*/}
+              <p className='m-2 p-2'>"Everybody is different"</p>
             </div>
+
+
 
           </div>
         </>
