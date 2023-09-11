@@ -41,7 +41,7 @@ function App() {
                 <button className="p-2 m-2">Post</button>
               </div>
             </div>
-            <form className="login bg-rose-50  rounded-lg m-4 border-2 shadow-xl flex flex-col items-center min">
+            <div className="login bg-rose-50  rounded-lg m-4 border-2 shadow-xl flex flex-col items-center min">
               <button className="p-2 m-4 bg-pink-400">Talk right now</button>
               <h1 className='m-2 text-4xl p-2'>Login</h1>
               <button className="p-2 m-2" onClick={() => console.log("hello world")} >New user? register</button>
@@ -57,7 +57,7 @@ function App() {
 
 
 
-            </form>
+            </div>
             <div className="painting-phrase bg-lime-100 rounded-lg m-4 border-2 shadow-xl flex flex-col items-center justify-center">
               {/* TODO on click of img, takes client to a library of soothing and inspiring paintings */}
               <img src="/kandinsky.png" alt="an image here" className="mt-4 mr-8 ml-8 h-72 rounded-lg" />
