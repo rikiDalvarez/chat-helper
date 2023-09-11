@@ -2,8 +2,17 @@ import React from 'react'
 
 export default function Dashboard() {
 	return (
-		<div className="app flex flex-col">
-			<div className="dashboard bg-green-200 h-60 w-60">Dashboard</div>
+		<div className="dashboard flex flex-row">
+			<div className="left-col bg-green-200  ">
+				<button>Create chatroom</button>
+				<div className="chat-info"> Chat info</div>
+			</div>
+			<div className="main-col flex flex-col bg-orange-200">
+				<label htmlFor="filter">
+					<input className='p-2 m-2 border-2  rounded-lg' id="filter" type="text" placeholder='search for a chatroom' />
+				</label>
+				<div className="chat-rooms"> Chat rooms</div>
+			</div>
 		</div>
 	)
 }

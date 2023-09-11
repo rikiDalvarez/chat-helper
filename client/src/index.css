@@ -49,3 +49,7 @@ button:focus-visible {
   max-height: 400px;
  
 }
+
+.app {
+  width: 100%;
+}
