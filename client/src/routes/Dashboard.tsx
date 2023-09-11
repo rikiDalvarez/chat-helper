@@ -3,15 +3,37 @@ import React from 'react'
 export default function Dashboard() {
 	return (
 		<div className="dashboard flex flex-row">
-			<div className="left-col bg-green-200  ">
+			<div className="left-col m-4 p-4 bg-green-200  ">
 				<button>Create chatroom</button>
 				<div className="chat-info"> Chat info</div>
 			</div>
 			<div className="main-col flex flex-col bg-orange-200">
 				<label htmlFor="filter">
-					<input className='p-2 m-2 border-2  rounded-lg' id="filter" type="text" placeholder='search for a chatroom' />
+					<input className='p-2 m-6 border-2  rounded-lg' id="filter" type="text" placeholder='search for a chatroom' />
 				</label>
-				<div className="chat-rooms"> Chat rooms</div>
+				<div className="chat-rooms flex flex-row">
+					<div className="rooms m-4 w-64">
+						<p>#Topic</p>
+						<div className=" m-4">
+							<img src="/kandinsky.png" alt="" />
+						</div>
+						<button>jOIN CHAT</button>
+					</div>
+					<div className="rooms m-4 w-64">
+						<p>#Topic</p>
+						<div className=" m-4">
+							<img src="/kandinsky.png" alt="" />
+						</div>
+						<button>jOIN CHAT</button>
+					</div>
+					<div className="rooms m-4 w-64">
+						<p>#Topic</p>
+						<div className=" m-4">
+							<img src="/kandinsky.png" alt="" />
+						</div>
+						<button>jOIN CHAT</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	)
