@@ -1,11 +1,14 @@
 import './App.css'
 import { useState, useEffect } from "react";
-
+import { useNavigate } from 'react-router-dom';
+import Dashboard from './Dashboard';
 
 function App() {
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([{ name: "riki", password: "123" }, { name: "mieke", password: "123" }])
+
+  const navigate = useNavigate();
 
 
   return (
@@ -52,7 +55,7 @@ function App() {
                 <input className='p-2 m-2 border-2  rounded-lg' id="pssword" type="password" placeholder='passworld' />
               </label>
 
-              <button className="p-2 m-2">Login</button>
+              <button onClick={() => { navigate("/dashboard") }} className="p-2 m-2">Login</button>
 
 
 
@@ -68,6 +71,11 @@ function App() {
 
 
 
+          </div>
+          <div className="footer flex flex-row justify-normal">
+            <p className="m-5 ">about</p>
+            <p className="m-5 ">donate</p>
+            <p className="m-5 ">work with us</p>
           </div>
         </>
       )}
