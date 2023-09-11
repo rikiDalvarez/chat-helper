@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 function App() {
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+  const [users, setUsers] = useState([{ name: "riki", password: "123" }, { name: "mieke", password: "123" }])
 
 
   return (
