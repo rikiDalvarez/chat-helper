@@ -1,16 +1,13 @@
 
-import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import Dashboard from './Dashboard';
+import React,{ useState } from "react";
 
-function App() {
-  const [name, setName] = useState('');
+import Login from "../components/Login";
+//import Dashboard from './Dashboard';
+
+const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [users, setUsers] = useState([{ name: "riki", password: "123" }, { name: "mieke", password: "123" }])
-
-  const navigate = useNavigate();
-
-
+  console.log(setIsLoading)
+  
   return (
     <div className="app flex flex-col">
 
@@ -44,23 +41,8 @@ function App() {
                 <button className="p-2 m-2">Post</button>
               </div>
             </div>
-            <div className="login bg-rose-50  rounded-lg m-4 border-2 shadow-xl flex flex-col items-center min">
-              <button className="p-2 m-4 bg-pink-400">Talk right now</button>
-              <h1 className='m-2 text-4xl p-2'>Login</h1>
-              <button className="p-2 m-2" onClick={() => console.log("hello world")} >New user? register</button>
-              <label htmlFor="email">
-                <input className='p-2 m-2 border-2  rounded-lg' id="email" type="text" placeholder='email' />
-              </label>
-              <label htmlFor="password">
-                <input className='p-2 m-2 border-2  rounded-lg' id="pssword" type="password" placeholder='passworld' />
-              </label>
-
-              <button onClick={() => { navigate("/dashboard") }} className="p-2 m-2">Login</button>
-
-
-
-
-            </div>
+            <Login/>
+          
             <div className="painting-phrase bg-lime-100 rounded-lg m-4 border-2 shadow-xl flex flex-col items-center justify-center">
               {/* TODO on click of img, takes client to a library of soothing and inspiring paintings */}
               <img src="/kandinsky.png" alt="an image here" className="mt-4 mr-8 ml-8 h-72 rounded-lg" />
