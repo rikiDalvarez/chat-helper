@@ -42,7 +42,6 @@ const App: React.FC = () => {
               </div>
             </div>
             <Login/>
-          
             <div className="painting-phrase bg-lime-100 rounded-lg m-4 border-2 shadow-xl flex flex-col items-center justify-center">
               {/* TODO on click of img, takes client to a library of soothing and inspiring paintings */}
               <img src="/kandinsky.png" alt="an image here" className="mt-4 mr-8 ml-8 h-72 rounded-lg" />
