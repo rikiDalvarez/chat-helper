@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Dashboard() {
+const Dashboard: React.FC = ()=> {
 	return (
 		<div className="dashboard flex flex-row">
 			<div className="left-col m-4 p-4 bg-green-200  ">
@@ -38,3 +38,6 @@ export default function Dashboard() {
 		</div>
 	)
 }
+
+
+export default Dashboard
