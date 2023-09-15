@@ -7,7 +7,7 @@ export default function Dashboard() {
 				<button>Create chatroom</button>
 				<div className="chat-info"> Chat info</div>
 			</div>
-			<div className="main-col flex flex-col bg-orange-200">
+			<div className="main-col flex flex-col shadow-lg rounded-lg">
 				<label htmlFor="filter">
 					<input className='p-2 m-6 border-2  rounded-lg' id="filter" type="text" placeholder='search for a chatroom' />
 				</label>

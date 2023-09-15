@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import App from './routes/App';
 import Dashboard from './routes/Dashboard';
+import Chatroom from './routes/Chatroom';
 
 
 const router = createBrowserRouter([
@@ -17,7 +18,11 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />
-  }
+  },
+  {
+    path: "/chatroom",
+    element: <Chatroom />
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
