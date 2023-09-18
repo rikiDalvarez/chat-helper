@@ -11,8 +11,11 @@ import {
   playerControllers,
   rankingControllers,
 } from "./application/controller";
-import  { Server } from "http";
+import { Server } from "http";
 import { Connection } from "mongoose";
+
+// @ts-ignore
+import { Sequelize } from "sequelize";
 
 export type PlayerRootControllers = {
   handleLogin: (
@@ -73,8 +76,8 @@ export type RankingRootControllers = {
 // start an app with server and connection
 export class Application {
   server: Server;
-  connection: Connection;
-  constructor(server: Server, connection: Connection) {
+  connection: Sequelize | Connection;
+  constructor(server: Server, connection: Sequelize | Connection) {
     this.server = server;
     this.connection = connection;
   }
@@ -84,6 +87,7 @@ export class Application {
     this.connection.close();
   }
 }
+
 
 //start server for app or to test integration tests
 export async function applicationStart() {
@@ -113,11 +117,13 @@ export async function appSetup(app: Express, router: Router) {
 async function startServer(databaseType: string, databaseName: string) {
   //startDatabase
   const dataBaseDetails = await initDataBase(databaseType, databaseName);
-  
+
+  //initialize services depending on DATABASE
   const { playerService, rankingService } = buildServices(
     databaseType,
     dataBaseDetails
   );
+    
   const playerRootControllers = playerControllers(playerService);
   const rankingRootControllers = rankingControllers(rankingService);
   const app = express();
