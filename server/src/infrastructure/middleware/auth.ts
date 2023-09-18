@@ -12,7 +12,6 @@ const authenticate = (
   res: Response,
   next: NextFunction
 ) => {
-
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
@@ -26,11 +25,10 @@ const authenticate = (
     next();
   } catch (error) {
     if (error === "jwt expired") {
-      next(error)
+      next(error);
     }
     next(error);
   }
-
 };
 
 export default authenticate;

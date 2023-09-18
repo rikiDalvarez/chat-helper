@@ -1,4 +1,6 @@
+// @ts-ignore
 import { Sequelize } from "sequelize";
+// @ts-ignore
 import { createConnection } from "mysql2/promise";
 
 type connectionConfig = {

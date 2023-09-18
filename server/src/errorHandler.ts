@@ -1,5 +1,7 @@
 import { NextFunction, Response } from "express";
 
+
+//middleware errorhandler
 export const errorHandler = (
   error: Error,
   response: Response,

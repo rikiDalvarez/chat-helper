@@ -6,6 +6,7 @@ import { RankingInterface } from "../application/RankingInterface";
 import { Ranking } from "../domain/Ranking";
 import { PlayerList } from "../domain/PlayerList";
 import { GameSQL } from "./models/mySQLModels/GameMySQLModel";
+
 import { QueryTypes, Sequelize, ValidationError } from "sequelize";
 
 export class PlayerMySQLManager implements PlayerInterface {

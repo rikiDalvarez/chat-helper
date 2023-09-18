@@ -1,13 +1,16 @@
 import mongoose from "mongoose";
 import { GameType } from "../../domain/Player";
+import { v4 as uuidv4 } from "uuid";
 
-export const playerSchema = new mongoose.Schema({
+export const userSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    default: uuidv4,
+    unique: true,
+  },
   name: {
     type: String,
-    index: {
-      unique: true,
-      partialFilterExpression: { name: { $type: "string" } },
-    },
+    unique: false,
   },
   email: {
     type: String,

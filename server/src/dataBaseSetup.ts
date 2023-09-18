@@ -1,12 +1,21 @@
+
+// SQL IMPORTS TO USE SQL
+// @ts-ignore
 import { Sequelize } from "sequelize/types/sequelize";
+// @ts-ignore
+import { initializeGameTable } from "./infrastructure/models/mySQLModels/GameMySQLModel";
+// @ts-ignore
+import { initializePlayerTable } from "./infrastructure/models/mySQLModels/PlayerMySQLModel";
+// @ts-ignore
+import { createSQLTableRelations } from "./infrastructure/models/mySQLModels/tableRelations";
+import { createSQLDatabase, createSequelizer } from "./infrastructure/mySQLConnection";
+
+
+// Default imports (using mongoDB)
 import config from "../config/config";
 import { MongoPlayerType } from "./domain/Player";
 import { playerSchema } from "./infrastructure/models/mongoDbModel";
-import { initializeGameTable } from "./infrastructure/models/mySQLModels/GameMySQLModel";
-import { initializePlayerTable } from "./infrastructure/models/mySQLModels/PlayerMySQLModel";
-import { createSQLTableRelations } from "./infrastructure/models/mySQLModels/tableRelations";
 import { connectDatabase } from "./infrastructure/mongoDbConnection";
-import { createSQLDatabase, createSequelizer } from "./infrastructure/mySQLConnection";
 import { Connection, Model } from "mongoose";
 
 export type InitDataBase = {
@@ -26,13 +35,18 @@ export async function initDataBase(
       document: playerDocument,
     });
   } else {
+    
     await createSQLDatabase(databaseName, {
+      // @ts-ignore
       host: config.HOST,
+      // @ts-ignore
       user: config.MYSQL_USER,
+      // @ts-ignore
       password: config.MYSQL_PASSWORD,
     });
     const sequelize = createSequelizer(
       databaseName,
+      // @ts-ignore
       config.MYSQL_USER,
       config.MYSQL_PASSWORD,
       config.HOST
