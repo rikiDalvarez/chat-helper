@@ -1,31 +1,26 @@
-import { Sequelize } from "sequelize/types/sequelize";
 import config from "../config/config";
 import { MongoPlayerType } from "./domain/Player";
 import { playerSchema } from "./infrastructure/models/mongoDbModel";
-import { initializeGameTable } from "./infrastructure/models/mySQLModels/GameMySQLModel";
-import { initializePlayerTable } from "./infrastructure/models/mySQLModels/PlayerMySQLModel";
-import { createSQLTableRelations } from "./infrastructure/models/mySQLModels/tableRelations";
 import { connectDatabase } from "./infrastructure/mongoDbConnection";
-import { createSQLDatabase, createSequelizer } from "./infrastructure/mySQLConnection";
 import { Connection, Model } from "mongoose";
 
 export type InitDataBase = {
-  connection: Connection | Sequelize;
+  connection: Connection;
   document?: Model<MongoPlayerType>;
 };
 
 export async function initDataBase(
   databaseType: string,
   databaseName: string
-): Promise<InitDataBase> {
+): Promise<InitDataBase | null> {
   if (databaseType === "mongo") {
     const connection = await connectDatabase(config.MONGO_URI, databaseName).asPromise();
     const playerDocument = connection.model<MongoPlayerType>("Player", playerSchema);
-    return Promise.resolve({
-      connection: connection,
-      document: playerDocument,
-    });
-  } else {
+    return Promise.resolve({connection: connection,
+      document: playerDocument})
+  }
+  /* else {
+    
     await createSQLDatabase(databaseName, {
       host: config.HOST,
       user: config.MYSQL_USER,
@@ -40,6 +35,8 @@ export async function initDataBase(
     initializeGameTable(sequelize);
     initializePlayerTable(sequelize);
     await createSQLTableRelations(sequelize);
-    return Promise.resolve({ connection: sequelize });
-  }
+    
+    return Promise.resolve({ connection: "sequelize" });
+  }*/
+  return null
 }
