@@ -1,13 +1,39 @@
 import mongoose from "mongoose";
-import { GameType } from "../../domain/Player";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
+
+const messageSchema = new mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  text: {
+    type: String,
+    required: true,
+  },
+  sender: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const roomSchema = new mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  name: {
+    type: String,
+    required: true,
+  },
+  participants: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  messages: [messageSchema],
+});
 
 export const userSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    default: uuidv4,
-    unique: true,
-  },
   name: {
     type: String,
     unique: false,
@@ -27,14 +53,8 @@ export const userSchema = new mongoose.Schema({
   },
   registrationDate: {
     type: Date,
+    default: Date.now,
     required: true,
   },
-  successRate: {
-    type: Number,
-    required: true,
-  },
-  games: {
-    type: Array<GameType>,
-    required: true,
-  },
+  rooms: [roomSchema],
 });
