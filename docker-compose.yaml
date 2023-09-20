@@ -1,0 +1,56 @@
+version: '3.8'
+
+networks:
+  chat-helper:
+    driver: bridge
+
+services:
+  mongodb:
+    image: mongo:6-jammy
+    ports:
+      - '27017:27017'
+    volumes:
+      - dbdata6:/data/db
+    networks:
+      - chat-helper
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - '3306:3306'
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - chat-helper      
+
+  backend:
+    build:
+      context: ./server
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017
+      - SQL_URI=mysql://mysql
+      - HOST=mysql
+    networks:
+      - chat-helper
+    depends_on:
+      - mongodb
+
+  client:
+    build:
+      context: ./client
+    environment:
+      NODE_ENV: development
+    ports:
+      - 5173:5173
+    networks:
+      - chat-helper
+    depends_on:
+      - backend
+
+volumes:
+  my-db:
+  dbdata6:
+
