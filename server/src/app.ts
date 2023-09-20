@@ -81,7 +81,7 @@ export class Application {
 export async function applicationStart() {
   const databaseName =
     config.NODE_ENV === "test" ? config.TEST_DATABASE : config.DATABASE;
-  return startServer(config.DATABASE_ENV, databaseName);
+  return startServer(databaseName);
 }
 
 // set up middlewares
@@ -102,7 +102,7 @@ export async function appSetup(app: Express, router: Router) {
   );
 }
 
-async function startServer(databaseType: string, databaseName: string) {
+async function startServer(databaseName: string) {
   //startDatabase
   const dataBaseDetails = await initDataBase(databaseName);
 

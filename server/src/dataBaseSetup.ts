@@ -11,7 +11,6 @@ export type InitDataBase = {
 };
 
 export async function initDataBase(
-  databaseType: string,
   databaseName: string
 ): Promise<InitDataBase> {
   const connection = await connectDatabase(
