@@ -1,2 +1,1 @@
-# This is a chat app to help people
-
+# Depression and Suicidal Thoughts Support Chat App
