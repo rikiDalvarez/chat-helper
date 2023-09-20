@@ -2,7 +2,7 @@ FROM node:18-alpine
 
 ENV MONGO_URI="mongodb://mongodb:27017"
 ENV NODE_ENV="development"
-ENV DATABASE_ENV='sql'
+ENV DATABASE_ENV='mongo'
 ENV TEST_DATABASE='test'
 ENV DATABASE="chat-helper"
 ENV PORT="5000"

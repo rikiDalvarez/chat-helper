@@ -14,9 +14,6 @@ import {
 import { Server } from "http";
 import { Connection } from "mongoose";
 
-// @ts-ignore
-import { Sequelize } from "sequelize";
-
 export type PlayerRootControllers = {
   handleLogin: (
     req: Request,
@@ -61,23 +58,15 @@ export type RankingRootControllers = {
     res: Response,
     next: NextFunction
   ) => Promise<void>;
-  getLoser: (
-    req: Request,
-    res: Response,
-    next: NextFunction)
-    => Promise<void>;
-  getWinner: (
-    req: Request,
-    res: Response,
-    next: NextFunction)
-    => Promise<void>;
+  getLoser: (req: Request, res: Response, next: NextFunction) => Promise<void>;
+  getWinner: (req: Request, res: Response, next: NextFunction) => Promise<void>;
 };
 
 // start an app with server and connection
 export class Application {
   server: Server;
-  connection: Sequelize | Connection;
-  constructor(server: Server, connection: Sequelize | Connection) {
+  connection: Connection;
+  constructor(server: Server, connection: Connection) {
     this.server = server;
     this.connection = connection;
   }
@@ -87,7 +76,6 @@ export class Application {
     this.connection.close();
   }
 }
-
 
 //start server for app or to test integration tests
 export async function applicationStart() {
@@ -116,14 +104,11 @@ export async function appSetup(app: Express, router: Router) {
 
 async function startServer(databaseType: string, databaseName: string) {
   //startDatabase
-  const dataBaseDetails = await initDataBase(databaseType, databaseName);
+  const dataBaseDetails = await initDataBase(databaseName);
 
   //initialize services depending on DATABASE
-  const { playerService, rankingService } = buildServices(
-    databaseType,
-    dataBaseDetails
-  );
-    
+  const { playerService, rankingService } = buildServices(dataBaseDetails);
+
   const playerRootControllers = playerControllers(playerService);
   const rankingRootControllers = rankingControllers(rankingService);
   const app = express();
@@ -137,5 +122,3 @@ async function startServer(databaseType: string, databaseName: string) {
 
   return new Application(server, dataBaseDetails.connection);
 }
-
-
