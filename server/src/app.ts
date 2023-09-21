@@ -1,54 +1,16 @@
 import "dotenv/config";
 import config from "../config/config";
-import { buildServices } from "./application/servicesBuilder";
-import { initDataBase } from "./dataBaseSetup";
+import { initDataBase } from "./initDB";
 import cors from "cors";
-import { initRoutes } from "./routes";
 import { errorHandler } from "./errorHandler";
 import express, { NextFunction, Request, Response, Router } from "express";
 import { Express } from "express-serve-static-core";
-import {
-  playerControllers,
-  rankingControllers,
-} from "./application/controller";
 import { Server } from "http";
 import { Connection } from "mongoose";
-
-// @ts-ignore
-import { Sequelize } from "sequelize";
+import router from "./routes";
 
 export type PlayerRootControllers = {
-  handleLogin: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<Response | undefined>;
-  postPlayer: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<Response | undefined>;
-  changeName: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<Response | undefined>;
-  getPlayers: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<void>;
-  addGame: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<Response | undefined>;
-  deleteAllGames: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<Response | undefined>;
-  getGames: (
+  createUser: (
     req: Request,
     res: Response,
     next: NextFunction
@@ -61,23 +23,15 @@ export type RankingRootControllers = {
     res: Response,
     next: NextFunction
   ) => Promise<void>;
-  getLoser: (
-    req: Request,
-    res: Response,
-    next: NextFunction)
-    => Promise<void>;
-  getWinner: (
-    req: Request,
-    res: Response,
-    next: NextFunction)
-    => Promise<void>;
+  getLoser: (req: Request, res: Response, next: NextFunction) => Promise<void>;
+  getWinner: (req: Request, res: Response, next: NextFunction) => Promise<void>;
 };
 
 // start an app with server and connection
 export class Application {
   server: Server;
-  connection: Sequelize | Connection;
-  constructor(server: Server, connection: Sequelize | Connection) {
+  connection: Connection;
+  constructor(server: Server, connection: Connection) {
     this.server = server;
     this.connection = connection;
   }
@@ -88,12 +42,11 @@ export class Application {
   }
 }
 
-
 //start server for app or to test integration tests
 export async function applicationStart() {
   const databaseName =
     config.NODE_ENV === "test" ? config.TEST_DATABASE : config.DATABASE;
-  return startServer(config.DATABASE_ENV, databaseName);
+  return startServer(databaseName);
 }
 
 // set up middlewares
@@ -114,28 +67,15 @@ export async function appSetup(app: Express, router: Router) {
   );
 }
 
-async function startServer(databaseType: string, databaseName: string) {
+async function startServer(databaseName: string) {
   //startDatabase
-  const dataBaseDetails = await initDataBase(databaseType, databaseName);
-
-  //initialize services depending on DATABASE
-  const { playerService, rankingService } = buildServices(
-    databaseType,
-    dataBaseDetails
-  );
-    
-  const playerRootControllers = playerControllers(playerService);
-  const rankingRootControllers = rankingControllers(rankingService);
+  const dataBaseDetails = await initDataBase();
   const app = express();
-  const router = express.Router();
-  await initRoutes(router, playerRootControllers, rankingRootControllers);
   await appSetup(app, router);
 
   const server = app.listen(config.PORT, () => {
     console.log(`Server is listening on port ${config.PORT}! 🍄 `);
   });
 
-  return new Application(server, dataBaseDetails.connection);
+  return new Application(server, dataBaseDetails.connectionDetails);
 }
-
-
