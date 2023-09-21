@@ -1,6 +1,6 @@
 import { User } from "../domain/User";
 
-export interface PlayerInterface {
+export interface UserInterface {
   createUser(user: User): Promise<string>; // return user_id
   // changeName(playerId: string, newName: string): Promise<Partial<Player>>;
   // addGame(playerDetails: Player): Promise<GameType>;

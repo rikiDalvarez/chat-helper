@@ -5,14 +5,17 @@ import { userService } from "../initDB";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sanitizedConfig from "../../config/config";
-import { PlayerService } from "./UserService";
 
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
+export const createUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { email, password, name } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User(email, hashedPassword, name);
-    const playerId = await playerService.createUser(newUser);
+    const playerId = await userService.createUser(newUser);
     return res.status(201).json({ Player_id: playerId });
   } catch (error) {
     next(error);

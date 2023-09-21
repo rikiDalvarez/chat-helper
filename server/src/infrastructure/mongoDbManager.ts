@@ -1,9 +1,9 @@
-import { PlayerInterface } from "../application/UserInterface";
+import { UserInterface } from "../application/UserInterface";
 import { MongoUserType, User } from "../domain/User";
 import mongoose, { Model } from "mongoose";
 import { mongo } from "mongoose";
 
-export class UserMongoDbManager implements PlayerInterface {
+export class UserMongoDbManager implements UserInterface {
   private playerDocument: Model<MongoUserType>;
 
   constructor(playerDocument: Model<MongoUserType>) {
