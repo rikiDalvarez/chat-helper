@@ -35,7 +35,7 @@ const roomSchema = new mongoose.Schema({
 
 export const userSchema = new mongoose.Schema({
   name: {
-    type: String,
+    type: String || null,
     unique: false,
   },
   email: {

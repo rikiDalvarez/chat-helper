@@ -1,9 +1,11 @@
+import { ObjectId } from "mongodb";
+
 export type MongoUserType = {
   _id: string;
-  rooms: Array<IRoom>;
   email: string;
   name: string | null;
   password: string;
+  rooms: Array<IRoom>;
   registrationDate: Date;
 };
 
@@ -18,6 +20,7 @@ interface IMessage {
   timestamp: Date;
 }
 export class User {
+  readonly id?: ObjectId;
   readonly email: string;
   readonly name: string | null;
   readonly password: string;
@@ -25,16 +28,18 @@ export class User {
   private _rooms: Array<IRoom>;
 
   constructor(
+    name: string | null = null,
     email: string,
     password: string,
-    name: string | null = null,
-    rooms: Array<IRoom> = []
+    rooms: Array<IRoom> = [],
+    id: ObjectId
   ) {
     this.email = email;
     this.name = name;
     this.password = password;
     this._registrationDate = new Date();
     this._rooms = rooms;
+    this.id = id;
   }
 
   public set rooms(rooms: Array<IRoom>) {

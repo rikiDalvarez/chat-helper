@@ -5,6 +5,7 @@ import { userService } from "../initDB";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sanitizedConfig from "../../config/config";
+import { ObjectId } from "mongodb";
 
 export const createUser = async (
   req: Request,
@@ -14,7 +15,7 @@ export const createUser = async (
   try {
     const { email, password, name } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User(email, hashedPassword, name);
+    const newUser = new User(name, email, hashedPassword, [], new ObjectId());
     const playerId = await userService.createUser(newUser);
     return res.status(201).json({ Player_id: playerId });
   } catch (error) {
@@ -22,35 +23,29 @@ export const createUser = async (
   }
 };
 
-//   const handleLogin = async (
-//     req: Request,
-//     res: Response,
-//     next: NextFunction
-//   ) => {
-//     try {
-//       const { email, password } = req.body;
-//       const player = await playerService.findPlayerByEmail(email);
-//       if (!player) {
-//         return res
-//           .status(401)
-//           .json({ error: "no player found with this email" });
-//       }
-//       const passwordMatch = await bcrypt.compare(password, player.password);
-//       if (!passwordMatch) {
-//         return res.status(401).json({ error: "authentication failed" });
-//       }
-//       const token = jwt.sign(
-//         { userId: player.id },
-//         sanitizedConfig.JWT_SECRET,
-//         {
-//           expiresIn: "600s",
-//         }
-//       );
-//       return res.json({ token: token, name: player.name, id: player.id });
-//     } catch (error) {
-//       next(error);
-//     }
-//   };
+export const loginHandle = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email, password } = req.body;
+    const player = await userService.findUserByEmail(email);
+    if (!player) {
+      return res.status(401).json({ error: "no player found with this email" });
+    }
+    const passwordMatch = await bcrypt.compare(password, player.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ error: "authentication failed" });
+    }
+    const token = jwt.sign({ userId: player.id }, sanitizedConfig.JWT_SECRET, {
+      expiresIn: "600s",
+    });
+    return res.json({ token: token, name: player.name, id: player.id });
+  } catch (error) {
+    next(error);
+  }
+};
 
 //   const getPlayers = async (
 //     req: Request,

@@ -24,9 +24,9 @@ export class UserService {
   //   return this.playerInterface.findPlayer(playerID);
   // }
 
-  // findPlayerByEmail(playerEmail: string): Promise<Player> {
-  //   return this.playerInterface.findPlayerByEmail(playerEmail);
-  // }
+  findUserByEmail(userEmail: string): Promise<User> {
+    return this.userInterface.findUserByEmail(userEmail);
+  }
 
   // async addGame(playerId: string): Promise<GameType> {
   //   const dice = new Dice();

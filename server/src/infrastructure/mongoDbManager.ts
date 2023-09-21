@@ -74,16 +74,16 @@ export class UserMongoDbManager implements UserInterface {
   //   return player;
   // }
 
-  // async findPlayerByEmail(playerEmail: string): Promise<Player> {
-  //   const playerDetails = await this.playerDocument.findOne({
-  //     email: playerEmail,
-  //   });
-  //   if (!playerDetails) {
-  //     throw new Error("EmailNotExists");
-  //   }
-  //   const { name, email, password, games, id } = playerDetails;
-  //   return new Player(email, password, games, name, id);
-  // }
+  async findUserByEmail(playerEmail: string): Promise<User> {
+    const playerDetails = await this.playerDocument.findOne({
+      email: playerEmail,
+    });
+    if (!playerDetails) {
+      throw new Error("EmailNotExists");
+    }
+    const { name, email, password, rooms, id } = playerDetails;
+    return new User(name, email, password, rooms, id);
+  }
 
   // async getPlayerList(): Promise<PlayerList> {
   //   const playersFromDB = await this.playerDocument.find({});
