@@ -6,10 +6,6 @@ ENV DATABASE_ENV='mongo'
 ENV TEST_DATABASE='test'
 ENV DATABASE="chat-helper"
 ENV PORT="5000"
-ENV SQL_URI='mysql://mysql'
-ENV MYSQL_USER='root'
-ENV MYSQL_PASSWORD='password'
-ENV HOST='mysql'
 ENV JWT_SECRET="5dd0aa20-a5c7-472c-b4aa-2d7716a5a654"
 WORKDIR /server
 COPY package*.json /server

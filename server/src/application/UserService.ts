@@ -1,6 +1,11 @@
 import { User } from "../domain/User";
 import { PlayerInterface } from "./PlayerInterface";
 
+/*
+service = new PlayerService(playerInterface)
+service.createUser(user)
+*/
+
 export class PlayerService {
   playerInterface: PlayerInterface;
   constructor(playerInterface: PlayerInterface) {

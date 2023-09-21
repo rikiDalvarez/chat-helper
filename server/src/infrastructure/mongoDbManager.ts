@@ -3,7 +3,7 @@ import { MongoUserType, User } from "../domain/User";
 import mongoose, { Model } from "mongoose";
 import { mongo } from "mongoose";
 
-export class PlayerMongoDbManager implements PlayerInterface {
+export class UserMongoDbManager implements PlayerInterface {
   private playerDocument: Model<MongoUserType>;
 
   constructor(playerDocument: Model<MongoUserType>) {

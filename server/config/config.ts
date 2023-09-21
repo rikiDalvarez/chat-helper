@@ -8,31 +8,23 @@ dotenv.config({ path: path.resolve(__dirname, "../.env") });
 // Interface to load env variables
 
 interface ENV {
-  NODE_ENV: string | undefined; 
+  NODE_ENV: string | undefined;
   DATABASE_ENV: string | undefined;
   PORT: number | undefined;
   MONGO_URI: string | undefined;
   DATABASE: string | undefined;
   TEST_DATABASE: string | undefined;
   JWT_SECRET: string | undefined;
-  SQL_URI: string | undefined;
-  MYSQL_USER: string | undefined;
-  MYSQL_PASSWORD: string | undefined;
-  HOST: string | undefined;
 }
 
 interface Config {
   NODE_ENV: string;
-  DATABASE_ENV: string
+  DATABASE_ENV: string;
   PORT: number;
   MONGO_URI: string;
   DATABASE: string;
   TEST_DATABASE: string;
-  JWT_SECRET: string ;
-  SQL_URI: string | undefined;
-  MYSQL_USER: string | undefined;
-  MYSQL_PASSWORD: string | undefined;
-  HOST: string | undefined;
+  JWT_SECRET: string;
 }
 
 // Loading process.env as ENV interface
@@ -47,10 +39,6 @@ const getConfig = (): ENV => {
     PORT: process.env.PORT ? Number(process.env.PORT) : undefined,
     MONGO_URI: process.env.MONGO_URI,
     JWT_SECRET: process.env.JWT_SECRET,
-    SQL_URI: process.env.SQL_URI,
-    MYSQL_USER: process.env.MYSQL_USER,
-    MYSQL_PASSWORD: process.env.MYSQL_PASSWORD,
-    HOST: process.env.HOST,
   };
 };
 

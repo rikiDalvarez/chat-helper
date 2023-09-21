@@ -1,9 +1,9 @@
 import "dotenv/config";
 import config from "../config/config";
 import { buildServices } from "./application/servicesBuilder";
-import { initDataBase } from "./dataBaseSetup";
+import { initDataBase } from "./initDB";
 import cors from "cors";
-import { initRoutes } from "./routes";
+import { route } from "./routes";
 import { errorHandler } from "./errorHandler";
 import express, { NextFunction, Request, Response, Router } from "express";
 import { Express } from "express-serve-static-core";
@@ -80,7 +80,7 @@ async function startServer(databaseName: string) {
 
   const app = express();
   const router = express.Router();
-  // await initRoutes(router, playerRootControllers);
+
   await appSetup(app, router);
 
   const server = app.listen(config.PORT, () => {
