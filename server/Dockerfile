@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:19.1-alpine
 
 ENV MONGO_URI="mongodb://mongodb:27017"
 ENV NODE_ENV="development"
@@ -11,6 +11,8 @@ WORKDIR /server
 COPY package*.json /server
 RUN npm install
 COPY . /server
+RUN npm uninstall bcrypt
+RUN npm install bcrypt
 RUN npm run build
 EXPOSE 5000
-CMD npm run prod_mongo
+CMD npm run start

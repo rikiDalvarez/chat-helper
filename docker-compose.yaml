@@ -17,10 +17,10 @@ services:
   backend:
     build:
       context: ./server
+    ports:
+      - "5000:5000"
     environment:
       - MONGO_URI=mongodb://mongodb:27017
-      - SQL_URI=mysql://mysql
-      - HOST=mysql
     networks:
       - chat-helper
     depends_on:
