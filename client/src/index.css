@@ -4,10 +4,18 @@
 @tailwind utilities;
 
 :root {
+
+  font-weight: 400;
+  margin: 0 auto;
+  text-align: center;
+  --color-primary: #199a48;
+  /* Replace with your primary color */
+  --color-secondary: #bfb02a;
+  /* Replace with your secondary color */
   max-width: 1280px;
-    margin: 0 auto;
-    text-align: center;
+  
 }
+
 
 body {
   margin: 0;
@@ -53,3 +61,45 @@ button:focus-visible {
 .app {
   width: 100%;
 }
+
+.instructions {
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
+}
+
+.instructions>svg {
+  margin-right: 0.25rem;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.hide {
+  display: none;
+}
+
+.valid {
+  color: limegreen;
+  margin-left: 0.25rem;
+}
+
+.invalid {
+  color: red;
+  margin-left: 0.25rem;
+}
+
+.errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+

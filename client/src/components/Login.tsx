@@ -30,7 +30,7 @@ const Login: React.FC = () => {
   }
 
   const navigateRegistration = () => {
-    navigate("/dashboard");
+    navigate("/register");
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
