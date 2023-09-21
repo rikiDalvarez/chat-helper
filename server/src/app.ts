@@ -69,7 +69,7 @@ export async function appSetup(app: Express, router: Router) {
 
 async function startServer(databaseName: string) {
   //startDatabase
-  const dataBaseDetails = await initDataBase();
+  const dataBaseDetails = await initDataBase(databaseName);
   const app = express();
   await appSetup(app, router);
 

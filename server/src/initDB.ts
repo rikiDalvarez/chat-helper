@@ -11,8 +11,8 @@ import { UserInterface } from "./application/UserInterface";
 export let userDocument: Model<MongoUserType>;
 export let userService: UserInterface;
 
-export const initDataBase = async () => {
-  const connectionDetails = connectDatabase(config.MONGO_URI, config.DATABASE);
+export const initDataBase = async (databaseName: string) => {
+  const connectionDetails = connectDatabase(config.MONGO_URI, databaseName);
   userDocument = connectionDetails.model<MongoUserType>("User", userSchema);
   const mongoDbManager = new UserMongoDbManager(userDocument);
   userService = new UserService(mongoDbManager);
