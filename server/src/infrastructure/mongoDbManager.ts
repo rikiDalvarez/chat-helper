@@ -29,7 +29,7 @@ export class PlayerMongoDbManager implements PlayerInterface {
     throw err;
   }
 
-  async createPlayer(user: User): Promise<string> {
+  async createUser(user: User): Promise<string> {
     const newPlayer = {
       email: user.email,
       password: user.password,

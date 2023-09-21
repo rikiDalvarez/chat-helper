@@ -7,8 +7,8 @@ export class PlayerService {
     this.playerInterface = playerInterface;
   }
 
-  createPlayer(playerDetails: User): Promise<string> {
-    return this.playerInterface.createPlayer(playerDetails);
+  createUser(user: User): Promise<string> {
+    return this.playerInterface.createUser(user);
   }
 
   // changeName(playerId: string, newName: string): Promise<Partial<Player>> {

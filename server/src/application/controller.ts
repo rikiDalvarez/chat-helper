@@ -16,7 +16,7 @@ export function playerControllers(playerService: PlayerService) {
       const { email, password, name } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = new User(email, hashedPassword, name);
-      const playerId = await playerService.createPlayer(newUser);
+      const playerId = await playerService.createUser(newUser);
       return res.status(201).json({ Player_id: playerId });
     } catch (error) {
       next(error);

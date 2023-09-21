@@ -1,13 +1,13 @@
 // Default imports (using mongoDB)
 import config from "../config/config";
-import { MongoPlayerType } from "./domain/Player";
+import { MongoUserType } from "./domain/User";
 import { userSchema } from "./infrastructure/models/mongoDbModel";
 import { connectDatabase } from "./infrastructure/mongoDbConnection";
 import { Connection, Model } from "mongoose";
 
 export type InitDataBase = {
   connection: Connection | any;
-  document?: Model<MongoPlayerType>;
+  document?: Model<MongoUserType>;
 };
 
 export async function initDataBase(
@@ -17,7 +17,7 @@ export async function initDataBase(
     config.MONGO_URI,
     databaseName
   ).asPromise();
-  const playerDocument = connection.model<MongoPlayerType>("User", userSchema);
+  const playerDocument = connection.model<MongoUserType>("User", userSchema);
   return Promise.resolve({
     connection: connection,
     document: playerDocument,

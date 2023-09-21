@@ -7,45 +7,12 @@ import { initRoutes } from "./routes";
 import { errorHandler } from "./errorHandler";
 import express, { NextFunction, Request, Response, Router } from "express";
 import { Express } from "express-serve-static-core";
-import {
-  playerControllers,
-  rankingControllers,
-} from "./application/controller";
+import { playerControllers } from "./application/controller";
 import { Server } from "http";
 import { Connection } from "mongoose";
 
 export type PlayerRootControllers = {
-  handleLogin: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<Response | undefined>;
-  postPlayer: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<Response | undefined>;
-  changeName: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<Response | undefined>;
-  getPlayers: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<void>;
-  addGame: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<Response | undefined>;
-  deleteAllGames: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<Response | undefined>;
-  getGames: (
+  createUser: (
     req: Request,
     res: Response,
     next: NextFunction
@@ -107,13 +74,13 @@ async function startServer(databaseName: string) {
   const dataBaseDetails = await initDataBase(databaseName);
 
   //initialize services depending on DATABASE
-  const { playerService, rankingService } = buildServices(dataBaseDetails);
+  const { playerService } = buildServices(dataBaseDetails);
 
   const playerRootControllers = playerControllers(playerService);
-  const rankingRootControllers = rankingControllers(rankingService);
+
   const app = express();
   const router = express.Router();
-  await initRoutes(router, playerRootControllers, rankingRootControllers);
+  // await initRoutes(router, playerRootControllers);
   await appSetup(app, router);
 
   const server = app.listen(config.PORT, () => {
