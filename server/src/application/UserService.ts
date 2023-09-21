@@ -1,19 +1,19 @@
 import { User } from "../domain/User";
-import { PlayerInterface } from "./PlayerInterface";
+import { UserInterface } from "./UserInterface";
 
 /*
 service = new PlayerService(playerInterface)
 service.createUser(user)
 */
 
-export class PlayerService {
-  playerInterface: PlayerInterface;
-  constructor(playerInterface: PlayerInterface) {
-    this.playerInterface = playerInterface;
+export class UserService {
+  userInterface: UserInterface;
+  constructor(userInterface: UserInterface) {
+    this.userInterface = userInterface;
   }
 
   createUser(user: User): Promise<string> {
-    return this.playerInterface.createUser(user);
+    return this.userInterface.createUser(user);
   }
 
   // changeName(playerId: string, newName: string): Promise<Partial<Player>> {

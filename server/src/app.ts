@@ -1,15 +1,13 @@
 import "dotenv/config";
 import config from "../config/config";
-import { buildServices } from "./application/servicesBuilder";
 import { initDataBase } from "./initDB";
 import cors from "cors";
-import { route } from "./routes";
 import { errorHandler } from "./errorHandler";
 import express, { NextFunction, Request, Response, Router } from "express";
 import { Express } from "express-serve-static-core";
-import { playerControllers } from "./application/controller";
 import { Server } from "http";
 import { Connection } from "mongoose";
+import router from "./routes";
 
 export type PlayerRootControllers = {
   createUser: (
@@ -71,21 +69,13 @@ export async function appSetup(app: Express, router: Router) {
 
 async function startServer(databaseName: string) {
   //startDatabase
-  const dataBaseDetails = await initDataBase(databaseName);
-
-  //initialize services depending on DATABASE
-  const { playerService } = buildServices(dataBaseDetails);
-
-  const playerRootControllers = playerControllers(playerService);
-
+  const dataBaseDetails = await initDataBase();
   const app = express();
-  const router = express.Router();
-
   await appSetup(app, router);
 
   const server = app.listen(config.PORT, () => {
     console.log(`Server is listening on port ${config.PORT}! 🍄 `);
   });
 
-  return new Application(server, dataBaseDetails.connection);
+  return new Application(server, dataBaseDetails.connectionDetails);
 }

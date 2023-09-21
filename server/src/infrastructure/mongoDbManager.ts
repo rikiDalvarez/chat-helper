@@ -1,4 +1,4 @@
-import { PlayerInterface } from "../application/PlayerInterface";
+import { PlayerInterface } from "../application/UserInterface";
 import { MongoUserType, User } from "../domain/User";
 import mongoose, { Model } from "mongoose";
 import { mongo } from "mongoose";
