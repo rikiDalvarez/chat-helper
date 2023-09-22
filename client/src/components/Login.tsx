@@ -32,6 +32,9 @@ const Login: React.FC = () => {
   const navigateRegistration = () => {
     navigate("/register");
   };
+  const navigateChat = () => {
+    navigate("/chatroom");
+  };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -57,7 +60,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="login bg-rose-50  rounded-lg m-4 border-2 shadow-xl flex flex-col items-center min">
-      <button className="p-2 m-4 bg-pink-400">Talk right now</button>
+      <button onClick={navigateChat} className="p-2 m-4 bg-pink-400">Talk right now</button>
       <h1 className='m-2 text-4xl p-2'>Login</h1>
       <button className="p-2 m-2" onClick={navigateRegistration} >New user? register</button>
       <form onSubmit={handleSubmit}>
