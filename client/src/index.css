@@ -16,6 +16,16 @@
   
 }
 
+input[type="text"],
+input[type="password"],
+button,
+textarea {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
 
 body {
   margin: 0;
@@ -23,6 +33,11 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  justify-content: center;
+        /* Horizontal centering */
+  align-items: center;
+        /* Vertical centering */
+  
 }
 
 h1 {
@@ -102,4 +117,6 @@ button:focus-visible {
   padding: 0.5rem;
   margin-bottom: 0.5rem;
 }
+
+
 
