@@ -10,10 +10,11 @@ export interface RegistrationData {
 	email: string;
 	password: string;
 }
+const PORT = 5000
 
 export async function fetchLogin(data: FormData) {
 	// const PORT = import.meta.env.VITE_PORT
-	const PORT = 5000
+
 	console.log({ PORT })
 	const response = await fetch(`http://localhost:${PORT}/api/login`, {
 		method: 'POST',
