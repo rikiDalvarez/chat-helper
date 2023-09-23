@@ -16,6 +16,81 @@
   
 }
 
+/* CSS FOR POST */
+#freeform {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  resize: vertical;
+  /* Allows vertical resizing */
+  transition: border-color 0.3s ease;
+  /* Smooth transition for border color */
+}
+
+#freeform::placeholder {
+  color: #999;
+  /* Placeholder text color */
+}
+
+#freeform:focus {
+  border-color: #3498db;
+  /* Highlight border color on focus */
+  outline: none;
+  /* Remove default focus outline (not recommended for accessibility) */
+}
+
+/* Style to make it look like a floating label input */
+.label {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.label textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.label label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background-color: #fff;
+  padding: 0 5px;
+  font-size: 12px;
+  color: #999;
+}
+
+.label textarea:focus {
+  border-color: #3498db;
+}
+
+/* END  */
+
+.post-music {
+  max-width: 500px;
+}
+
+input[type="text"],
+input[type="password"],
+button,
+textarea {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
 
 body {
   margin: 0;
@@ -23,6 +98,15 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  justify-content: center;
+        /* Horizontal centering */
+  align-items: center;
+        /* Vertical centering */
+  
+}
+
+.login {
+  max-width: 380px;
 }
 
 h1 {
@@ -102,4 +186,6 @@ button:focus-visible {
   padding: 0.5rem;
   margin-bottom: 0.5rem;
 }
+
+
 

@@ -33,6 +33,7 @@ const App: React.FC = () => {
               <div className="post border-2 rounded-lg  shadow-xl p-4 m-4">
                 {/* TODO add information when highlighted explain what it does */}
                 <h3 className='m-2 text-4xl p-2'>Express yourself</h3>
+                <label htmlFor="freeform">Enter Text:</label>
                 <textarea placeholder="enter text here..." id="freeform" name="freeform" rows={5} cols={36}>
                 </textarea>
                 {/* TODO create a post on our twitter */}
