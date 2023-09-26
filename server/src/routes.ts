@@ -8,6 +8,6 @@ import { createUser, loginHandle } from "./application/controller";
 const router = express.Router();
 
 router.post("/newUser", createUser);
-router.get("/user", loginHandle);
+router.post("/user", loginHandle);
 
 export default router;
