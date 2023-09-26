@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: <Dashboard />
   },
   {
-    path: "/chatroom",
+    path: "/api/chatroom",
     element: <Chatroom />
   },
 ]);
