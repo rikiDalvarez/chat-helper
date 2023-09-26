@@ -48,7 +48,7 @@ const Login: React.FC = () => {
         localStorage.setItem("nickName", decodedToken.nickName);
         localStorage.setItem("id", decodedToken.userId);
         console.log("login successful");
-        navigate("/api/chatroom", { state: true })
+        navigate("/api/dashboard", { state: true })
       } else {
         alert("Email and/or password incorrect");
         console.error("login failed");

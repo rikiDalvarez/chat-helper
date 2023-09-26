@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { CreateRoom } from '../components/CreateRoom';
 
-const Dashboard: React.FC = ()=> {
+const Dashboard: React.FC = () => {
+	const [createRoom, setCreateRoom] = useState(false);
+
+	const handleCreateRoom = () => {
+		setCreateRoom((createRoom) => (!createRoom));
+	}
+
 	return (
 		<div className="dashboard flex flex-row">
 			<div className="left-col m-4 p-4 bg-green-200  ">
-				<button>Create chatroom</button>
+				<button onClick={handleCreateRoom}>Create chatroom</button>
+				{createRoom ? <CreateRoom /> : null}
 				<div className="chat-info"> Chat info</div>
 			</div>
 			<div className="main-col flex flex-col shadow-lg rounded-lg">
