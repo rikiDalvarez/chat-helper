@@ -30,22 +30,34 @@ export const loginHandle = async (
 ) => {
   try {
     const { email, password } = req.body;
-    const player = await userService.findUserByEmail(email);
-    if (!player) {
-      return res.status(401).json({ error: "no player found with this email" });
+    const user = await userService.findUserByEmail(email);
+    if (!user) {
+      return res.status(401).json({ error: "no user found with this email" });
     }
-    const passwordMatch = await bcrypt.compare(password, player.password);
+    const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
       return res.status(401).json({ error: "authentication failed" });
     }
-    const token = jwt.sign({ userId: player.id }, sanitizedConfig.JWT_SECRET, {
+    const token = jwt.sign({ userId: user.id }, sanitizedConfig.JWT_SECRET, {
       expiresIn: "600s",
     });
-    return res.json({ token: token, name: player.name, id: player.id });
+    return res.json({ token: token, name: user.name, id: user.id });
   } catch (error) {
     next(error);
   }
 };
+
+export const createRoom = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const {roomName, id} = req.body;
+  console.log(roomName, id)
+
+  
+
+}
 
 //   const getPlayers = async (
 //     req: Request,

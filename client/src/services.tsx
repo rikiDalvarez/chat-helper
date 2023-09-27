@@ -37,12 +37,14 @@ export const fetchRegistration = async (data: RegistrationData | null) => {
 	return response
 }
 
-export const fetchPlayerList = async (token: string | null) => {
-	const response = await fetch(`http://localhost:${PORT}/api/players`, {
-		method: "GET",
+export const postRoom = async (data: object) => {
+	const response = await fetch(`http://localhost:${PORT}/api/newRoom`, {
+		method: "PUT",
 		headers: {
-			Authorization: `Bearer ${token}`
-		}
+			'Content-Type': 'application/json',
+			//Authorization: `Bearer ${token}`
+		},
+		body : JSON.stringify(data)
 	})
 	return response;
 }
