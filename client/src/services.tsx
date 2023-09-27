@@ -16,7 +16,7 @@ export async function fetchLogin(data: FormData) {
 	// const PORT = import.meta.env.VITE_PORT
 
 	console.log({ PORT })
-	const response = await fetch(`http://localhost:${PORT}/api/login`, {
+	const response = await fetch(`http://localhost:${PORT}/api/user`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ export async function fetchLogin(data: FormData) {
 }
 
 export const fetchRegistration = async (data: RegistrationData | null) => {
-	const response = await fetch(`http://localhost:${PORT}/api/players`, {
+	const response = await fetch(`http://localhost:${PORT}/api/newUser`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

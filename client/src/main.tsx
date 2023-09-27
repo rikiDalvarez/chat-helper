@@ -21,11 +21,11 @@ const router = createBrowserRouter([
     element: <Register />
   },
   {
-    path: "/dashboard",
+    path: "/api/dashboard",
     element: <Dashboard />
   },
   {
-    path: "/chatroom",
+    path: "/api/chatroom",
     element: <Chatroom />
   },
 ]);

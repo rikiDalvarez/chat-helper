@@ -64,7 +64,7 @@ const Register: React.FC = () => {
 			const response = await fetchRegistration({ name: (name ? name : null), email: email, password: pwd });
 			if (response.ok) {
 				alert("Registration completed succesfully")
-				navigate("/login")
+				navigateToLogin();
 
 			} else {
 				alert("Email and/or name already in use");
@@ -76,11 +76,11 @@ const Register: React.FC = () => {
 	}
 
 	const navigateToLogin = () => {
-		navigate("/login")
+		navigate("/")
 	}
 
 	return (
-		<section className="min-h-screen flex items-center justify-center bg-color-movement">
+		<section className=" registerForm min-h-screen flex items-center justify-center bg-color-movement">
 
 			<p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} arial-alive="assertive">
 				{errMsg}</p>
@@ -91,7 +91,7 @@ const Register: React.FC = () => {
 						Name
 					</label>
 					<input
-						placeholder="Anonim"
+						placeholder="Name"
 						onChange={(e) => setName(e.target.value)}
 						className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
 						type="text"
