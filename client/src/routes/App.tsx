@@ -1,5 +1,5 @@
 
-import React,{ useState } from "react";
+import React, { useState } from "react";
 
 import Login from "../components/Login";
 //import Dashboard from './Dashboard';
@@ -7,7 +7,7 @@ import Login from "../components/Login";
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   console.log(setIsLoading)
-  
+
   return (
     <div className="app flex flex-col">
 
@@ -19,8 +19,7 @@ const App: React.FC = () => {
         <>
           <p> This chat is here to help and inspire, we want to support you thru whatever you are passing.</p>
           <img src="/background.png" alt="" className="fullscreen-img mb-4 border-2  rounded-lg shadow-xl" />
-          <h1
-            className="absolute top-0 left-0 w-full mt-80 text-center text-white text-4xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]  "> Hello Peter-Pan</h1>
+          <h1 className="absolute top-0 left-0 w-full mt-80 text-center text-white text-4xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]  "> Hello Peter-Pan</h1>
           <div className="help-section flex flex-row">
             <div className="post-music bg-lime-100  rounded-lg m-4 border-2 shadow-xl">
               <div className="music flex flex-col mt-6 items-center">
@@ -34,6 +33,7 @@ const App: React.FC = () => {
               <div className="post border-2 rounded-lg  shadow-xl p-4 m-4">
                 {/* TODO add information when highlighted explain what it does */}
                 <h3 className='m-2 text-4xl p-2'>Express yourself</h3>
+                <label htmlFor="freeform">Enter Text:</label>
                 <textarea placeholder="enter text here..." id="freeform" name="freeform" rows={5} cols={36}>
                 </textarea>
                 {/* TODO create a post on our twitter */}
@@ -41,7 +41,7 @@ const App: React.FC = () => {
                 <button className="p-2 m-2">Post</button>
               </div>
             </div>
-            <Login/>
+            <Login />
             <div className="painting-phrase bg-lime-100 rounded-lg m-4 border-2 shadow-xl flex flex-col items-center justify-center">
               {/* TODO on click of img, takes client to a library of soothing and inspiring paintings */}
               <img src="/kandinsky.png" alt="an image here" className="mt-4 mr-8 ml-8 h-72 rounded-lg" />

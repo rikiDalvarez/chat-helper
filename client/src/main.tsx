@@ -8,6 +8,7 @@ import {
 import App from './routes/App';
 import Dashboard from './routes/Dashboard';
 import Chatroom from './routes/Chatroom';
+import Register from './routes/Register';
 
 
 const router = createBrowserRouter([
@@ -16,11 +17,15 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/dashboard",
+    path: "/register",
+    element: <Register />
+  },
+  {
+    path: "/api/dashboard",
     element: <Dashboard />
   },
   {
-    path: "/chatroom",
+    path: "/api/chatroom",
     element: <Chatroom />
   },
 ]);
