@@ -7,4 +7,12 @@ socket.on("connect", () => {
 	console.log("connection:", socket.connected); // true
 });
 
+socket.on("login", (data) => {
+	console.log(data);
+});
+
+socket.on("disconnect", () => {
+	console.log("connection:", socket.connected); // false
+})
+
 export default socket;

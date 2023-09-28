@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post("/newUser", createUser);
 router.post("/user", loginHandle);
-router.put("/newRoom", createRoom )
+router.put("/newRoom", auth, createRoom);
 
 export default router;

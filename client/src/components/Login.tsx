@@ -10,7 +10,9 @@ interface IForm {
 }
 interface DecodedToken {
   userId: string;
-  nickName: string;
+  userName: string;
+  userEmail: string;
+
 }
 
 
@@ -41,20 +43,19 @@ const Login: React.FC = () => {
     event.preventDefault();
     try {
       const response = await fetchLogin(formData);
-      console.log(response)
       if (response.ok) {
         const data = await response.json();
         const token = data.token;
         const decodedToken: DecodedToken = jwt_decode(token);
-        console.log(decodedToken)
         localStorage.setItem("token", token);
         localStorage.setItem("id", decodedToken.userId);
-        console.log("Emitting 'login' event with data:", decodedToken);
-        console.log(socket)
+        localStorage.setItem("name", decodedToken.userName);
+        localStorage.setItem("email", decodedToken.userEmail);
         //testing socket
         socket.emit("login", {
           userId: decodedToken.userId,
-          nickName: decodedToken.nickName,
+          userName: decodedToken.userName,
+          userEmail: decodedToken.userEmail
         });
 
         navigate("/api/dashboard", { state: true })

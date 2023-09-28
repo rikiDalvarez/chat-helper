@@ -4,27 +4,28 @@ import { postRoom } from '../services'
 
 export const CreateRoom: React.FC = () => {
 	const [formData, setFormData] = useState<string>("")
+	const token = localStorage.getItem("token");
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setFormData(event.target.value)
-		
+
 	}
 	useEffect(() => {
 		console.log({ formData });
-	  }, [formData]);
+	}, [formData]);
 
-	  const handleSubmit = async (event: React.FormEvent) => {
+	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 		try {
-			let id = localStorage.getItem("id");
-			console.log({id})
-			const data = {id, roomName: formData }
-			const response = await postRoom(data)
-			console.log(response)
-		} catch(err) {
+			const id = localStorage.getItem("id");
+			console.log({ id })
+			const data = { id, roomName: formData }
+			const response = await postRoom(token, data)
+			console.log("response:", response)
+		} catch (err) {
 			console.log(err)
 		}
-	  } 
+	}
 
 	return (
 		<div>

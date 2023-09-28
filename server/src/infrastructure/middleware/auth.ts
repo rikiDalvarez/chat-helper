@@ -22,6 +22,7 @@ const authenticate = (
       ignoreExpiration: false,
     }) as JwtPayload;
     req.userId = decodedToken.userId;
+    console.log("token verified", req.userId);
     next();
   } catch (error) {
     if (error === "jwt expired") {

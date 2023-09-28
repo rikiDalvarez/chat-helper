@@ -48,7 +48,7 @@ export const loginHandle = async (
     const token = jwt.sign(payload, sanitizedConfig.JWT_SECRET, {
       expiresIn: "600s",
     });
-    return res.json({ token: token, name: user.name, id: user.id });
+    return res.json({ token: token });
   } catch (error) {
     next(error);
   }
