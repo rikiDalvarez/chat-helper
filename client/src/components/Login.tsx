@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { fetchLogin } from "../services";
 import jwt_decode from "jwt-decode";
+import socket from '../socketService';
 
 interface IForm {
   email: string,
@@ -40,14 +41,22 @@ const Login: React.FC = () => {
     event.preventDefault();
     try {
       const response = await fetchLogin(formData);
+      console.log(response)
       if (response.ok) {
         const data = await response.json();
         const token = data.token;
         const decodedToken: DecodedToken = jwt_decode(token);
+        console.log(decodedToken)
         localStorage.setItem("token", token);
-        localStorage.setItem("nickName", decodedToken.nickName);
         localStorage.setItem("id", decodedToken.userId);
-        console.log("login successful");
+        console.log("Emitting 'login' event with data:", decodedToken);
+        console.log(socket)
+        //testing socket
+        socket.emit("login", {
+          userId: decodedToken.userId,
+          nickName: decodedToken.nickName,
+        });
+
         navigate("/api/dashboard", { state: true })
       } else {
         alert("Email and/or password incorrect");
