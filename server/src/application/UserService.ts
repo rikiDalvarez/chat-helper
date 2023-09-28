@@ -28,13 +28,9 @@ export class UserService {
     return this.userInterface.findUserByEmail(userEmail);
   }
 
-  // async addGame(playerId: string): Promise<GameType> {
-  //   const dice = new Dice();
-  //   const player = await this.findPlayer(playerId);
-  //   const game = new Game(dice);
-  //   player.addNewGame(game);
-  //   return this.playerInterface.addGame(player);
-  // }
+  async addRoom(userId: string, roomName: string): Promise<Partial<User>> {
+    return this.userInterface.addRoom(userId, roomName);
+  }
 
   // deleteAllGames(playerDetails: Player): Promise<boolean> {
   //   return this.playerInterface.deleteAllGames(playerDetails);

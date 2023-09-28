@@ -102,26 +102,26 @@ export class UserMongoDbManager implements UserInterface {
   //   return new PlayerList(players);
   // }
 
-  // async changeName(
-  //   playerId: string,
-  //   newName: string
-  // ): Promise<Partial<Player>> {
-  //   try {
-  //     const player = await this.playerDocument.findByIdAndUpdate(playerId, {
-  //       name: newName,
-  //     });
-  //     if (!player) {
-  //       throw new Error("changeNameError");
-  //     }
-  //     const returnPlayer = { id: player.id, name: newName };
-  //     return returnPlayer;
-  //   } catch (err) {
-  //     if (err instanceof mongo.MongoServerError) {
-  //       this.uniqueViolationErrorHandler(err);
-  //     }
-  //     throw err;
-  //   }
-  // }
+  async addRoom(playerId: string, roomName: string): Promise<Partial<User>> {
+    try {
+      let userOld = await this.findUserById(playerId);
+
+      const room = { name: roomName, participants: [playerId], messages: [] };
+      const user = await this.playerDocument.findByIdAndUpdate(playerId, {
+        rooms: [...userOld.rooms, room],
+      });
+      if (!user) {
+        throw new Error("changeNameError");
+      }
+      console.log("from manager", user);
+      return user;
+    } catch (err) {
+      if (err instanceof mongo.MongoServerError) {
+        this.uniqueViolationErrorHandler(err);
+      }
+      throw err;
+    }
+  }
 
   // async addGame(player: Player): Promise<GameType> {
   //   const id = player.id;

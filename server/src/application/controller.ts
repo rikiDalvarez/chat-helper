@@ -61,9 +61,8 @@ export const createRoom = async (
 ) => {
   const { roomName, id } = req.body;
   try {
-    console.log("IN");
-    const user = await userService.findUserById(id);
-    console.log(user);
+    const user = await userService.addRoom(id, roomName);
+    console.log({ user });
 
     return res.status(201).json({ user });
   } catch (error) {
