@@ -38,7 +38,14 @@ export const loginHandle = async (
     if (!passwordMatch) {
       return res.status(401).json({ error: "authentication failed" });
     }
-    const token = jwt.sign({ userId: user.id }, sanitizedConfig.JWT_SECRET, {
+
+    const payload = {
+      userId: user.id,
+      userName: user.name,
+      userEmail: user.email,
+    };
+
+    const token = jwt.sign(payload, sanitizedConfig.JWT_SECRET, {
       expiresIn: "600s",
     });
     return res.json({ token: token, name: user.name, id: user.id });
@@ -52,12 +59,9 @@ export const createRoom = async (
   res: Response,
   next: NextFunction
 ) => {
-  const {roomName, id} = req.body;
-  console.log(roomName, id)
-
-  
-
-}
+  const { roomName, id } = req.body;
+  console.log(roomName, id);
+};
 
 //   const getPlayers = async (
 //     req: Request,

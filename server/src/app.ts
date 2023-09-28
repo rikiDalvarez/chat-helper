@@ -86,10 +86,13 @@ async function startServer(databaseName: string) {
   });
 
   io.on("connection", (socket) => {
+    console.log("hello there");
     console.log("A user connected");
 
     socket.on("login", (userData) => {
-      console.log(`User logged in: (ID: ${userData.userId})`);
+      console.log(`User logged in: (ID: ${userData})`);
+      const payload = { userData, socketId: socket.id };
+      socket.emit("login", payload);
     });
 
     socket.on("disconnect", () => {
