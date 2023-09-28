@@ -6,7 +6,7 @@ export interface UserInterface {
   // changeName(playerId: string, newName: string): Promise<Partial<Player>>;
   // addGame(playerDetails: Player): Promise<GameType>;
   // deleteAllGames(playerDetails: Player): Promise<boolean>;
-  // findPlayer(playerId: string): Promise<Player>;
+  findUserById(playerId: string): Promise<User>;
   // getPlayerList(): Promise<PlayerList>;
   // getGames(playerId: string): Promise<Array<GameType>>;
 }

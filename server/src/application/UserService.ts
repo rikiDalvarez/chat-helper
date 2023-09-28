@@ -20,9 +20,9 @@ export class UserService {
   //   return this.playerInterface.changeName(playerId, newName);
   // }
 
-  // findPlayer(playerID: string): Promise<Player> {
-  //   return this.playerInterface.findPlayer(playerID);
-  // }
+  findUserById(userID: string): Promise<User> {
+    return this.userInterface.findUserById(userID);
+  }
 
   findUserByEmail(userEmail: string): Promise<User> {
     return this.userInterface.findUserByEmail(userEmail);

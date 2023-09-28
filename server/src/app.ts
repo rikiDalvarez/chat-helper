@@ -93,13 +93,13 @@ async function startServer(databaseName: string) {
       const payload = { userData, socketId: socket.id };
       socket.emit("login", payload);
     });
+    const count = io.engine.clientsCount;
+    console.log(count);
 
     socket.on("disconnect", () => {
       console.log("A user disconnected");
     });
   });
-  const count = io.engine.clientsCount;
-  console.log(count);
 
   const server = httpServer.listen(config.PORT, () => {
     console.log(`Server is listening on port ${config.PORT}! 🍄 `);

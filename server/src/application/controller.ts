@@ -60,7 +60,15 @@ export const createRoom = async (
   next: NextFunction
 ) => {
   const { roomName, id } = req.body;
-  console.log(roomName, id);
+  try {
+    console.log("IN");
+    const user = await userService.findUserById(id);
+    console.log(user);
+
+    return res.status(201).json({ user });
+  } catch (error) {
+    next(error);
+  }
 };
 
 //   const getPlayers = async (
