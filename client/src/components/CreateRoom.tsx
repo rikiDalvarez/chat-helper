@@ -1,22 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, Dispatch, SetStateAction } from 'react'
+import { postRoom } from '../services'
 
-interface IForm {
-	name: string,
-	tags: string[],
+interface createRoomProps {
+	setCreateRoom: Dispatch<SetStateAction<boolean>>;
 }
-
-export const CreateRoom: React.FC = () => {
-	const [formData, setFormData] = useState<IForm>({
-		name: "",
-		tags: [],
-	})
+export const CreateRoom: React.FC<createRoomProps> = ({ setCreateRoom }) => {
+	const [formData, setFormData] = useState<string>("")
+	const token = localStorage.getItem("token");
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = event.target;
-		setFormData(prevData => ({
-			...prevData, [name]: value
-		}))
+		setFormData(event.target.value)
 
+	}
+	// useEffect(() => {
+	// 	console.log({ formData });
+	// }, [formData]);
+
+	const handleSubmit = async (event: React.FormEvent) => {
+		event.preventDefault();
+		try {
+			const id = localStorage.getItem("id");
+			console.log({ id })
+			const data = { id, roomName: formData }
+			const response = await postRoom(token, data)
+			console.log("response:", response)
+			setCreateRoom(false)
+
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	return (
@@ -31,20 +43,9 @@ export const CreateRoom: React.FC = () => {
 					className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
 					type="text"
 					id="name"
-					value={formData.name ? formData.name : undefined}
+					value={formData ? formData : undefined}
 				/>
-				<label htmlFor="tags" className="block text-gray-700 text-sm font-bold mb-2" >
-					tags
-				</label>
-				<input
-					placeholder="tags"
-					onChange={handleChange}
-					className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
-					type="text"
-					id="tags"
-					value={formData.tags[formData.tags.length - 1] ? formData.tags[formData.tags.length - 1] : undefined}
-				/>
-				<button> add</button>
+				<button onClick={handleSubmit}> add</button>
 			</section>
 		</div>
 	)

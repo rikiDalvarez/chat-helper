@@ -15,7 +15,6 @@ const PORT = 5000
 export async function fetchLogin(data: FormData) {
 	// const PORT = import.meta.env.VITE_PORT
 
-	console.log({ PORT })
 	const response = await fetch(`http://localhost:${PORT}/api/user`, {
 		method: 'POST',
 		headers: {
@@ -37,22 +36,33 @@ export const fetchRegistration = async (data: RegistrationData | null) => {
 	return response
 }
 
-export const fetchPlayerList = async (token: string | null) => {
-	const response = await fetch(`http://localhost:${PORT}/api/players`, {
-		method: "GET",
+export const postRoom = async (token: string | null, data: object) => {
+	const response = await fetch(`http://localhost:${PORT}/api/newRoom`, {
+		method: "PUT",
 		headers: {
+			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`
-		}
+		},
+		body: JSON.stringify(data)
 	})
 	return response;
 }
 
-export const fetchGameList = async (token: string | null, id: string | null) => {
-	const response = await fetch(`http://localhost:${PORT}/api/games/${id}`, {
+export const fetchUserList = async (token: string | null) => {
+	const response = await fetch(`http://localhost:${PORT}/api/users`, {
 		method: "GET",
 		headers: {
 			Authorization: `Bearer ${token}`,
+		}
+	})
+	return response
+}
 
+export const fetchRooms = async (token: string | null) => {
+	const response = await fetch(`http://localhost:${PORT}/api/rooms`, {
+		method: "GET",
+		headers: {
+			Authorization: `Bearer ${token}`,
 		}
 	})
 	return response

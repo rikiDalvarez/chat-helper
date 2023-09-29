@@ -30,41 +30,82 @@ export const loginHandle = async (
 ) => {
   try {
     const { email, password } = req.body;
-    const player = await userService.findUserByEmail(email);
-    if (!player) {
-      return res.status(401).json({ error: "no player found with this email" });
+    const user = await userService.findUserByEmail(email);
+    if (!user) {
+      return res.status(401).json({ error: "no user found with this email" });
     }
-    const passwordMatch = await bcrypt.compare(password, player.password);
+    const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
       return res.status(401).json({ error: "authentication failed" });
     }
-    const token = jwt.sign({ userId: player.id }, sanitizedConfig.JWT_SECRET, {
+
+    const payload = {
+      userId: user.id,
+      userName: user.name,
+      userEmail: user.email,
+    };
+
+    const token = jwt.sign(payload, sanitizedConfig.JWT_SECRET, {
       expiresIn: "600s",
     });
-    return res.json({ token: token, name: player.name, id: player.id });
+    return res.json({ token: token });
   } catch (error) {
     next(error);
   }
 };
 
-//   const getPlayers = async (
-//     req: Request,
-//     res: Response,
-//     next: NextFunction
-//   ) => {
-//     playerService
-//       .getPlayerList()
-//       .then((players) => {
-//         if (players) {
-//           return res.status(200).json(players);
-//         }
-//       })
-//       .catch((err) => {
-//         next(err);
-//         //in which scenario we will return this and what will be err.message???
-//         //return res.status(404).json({ error: err.message, error_code: "GP001" });
-//       });
-//   };
+export const createRoom = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { roomName, id } = req.body;
+  try {
+    const user = await userService.addRoom(id, roomName);
+    console.log({ user });
+
+    return res.status(201).json({ user });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getUserList = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  userService
+    .getUserList()
+    .then((users) => {
+      if (users) {
+        return res.status(200).json(users);
+      }
+    })
+    .catch((err) => {
+      next(err);
+      //in which scenario we will return this and what will be err.message???
+      //return res.status(404).json({ error: err.message, error_code: "GP001" });
+    });
+};
+export const getRoomList = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  userService
+    .getRoomList()
+    .then((rooms) => {
+      if (rooms) {
+        return res.status(200).json(rooms);
+      }
+    })
+    .catch((err) => {
+      next(err);
+      //in which scenario we will return this and what will be err.message???
+      //return res.status(404).json({ error: err.message, error_code: "GP001" });
+    });
+};
 
 //   const postPlayer = async (
 //     req: Request,
