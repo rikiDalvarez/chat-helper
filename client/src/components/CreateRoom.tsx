@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, Dispatch, SetStateAction } from 'react'
 import { postRoom } from '../services'
 
-
-export const CreateRoom: React.FC = () => {
+interface createRoomProps {
+	setCreateRoom: Dispatch<SetStateAction<boolean>>;
+}
+export const CreateRoom: React.FC<createRoomProps> = ({ setCreateRoom }) => {
 	const [formData, setFormData] = useState<string>("")
 	const token = localStorage.getItem("token");
 
@@ -10,9 +12,9 @@ export const CreateRoom: React.FC = () => {
 		setFormData(event.target.value)
 
 	}
-	useEffect(() => {
-		console.log({ formData });
-	}, [formData]);
+	// useEffect(() => {
+	// 	console.log({ formData });
+	// }, [formData]);
 
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
@@ -22,6 +24,8 @@ export const CreateRoom: React.FC = () => {
 			const data = { id, roomName: formData }
 			const response = await postRoom(token, data)
 			console.log("response:", response)
+			setCreateRoom(false)
+
 		} catch (err) {
 			console.log(err)
 		}

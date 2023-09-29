@@ -12,7 +12,7 @@ const Dashboard: React.FC = () => {
 		<div className="dashboard flex flex-row">
 			<div className="left-col m-4 p-4 bg-green-200  ">
 				<button onClick={handleCreateRoom}>Create chatroom</button>
-				{createRoom ? <CreateRoom /> : null}
+				{createRoom ? <CreateRoom setCreateRoom={setCreateRoom} /> : null}
 				<div className="chat-info"> Chat info</div>
 			</div>
 			<div className="main-col flex flex-col shadow-lg rounded-lg">

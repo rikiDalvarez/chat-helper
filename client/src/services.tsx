@@ -15,7 +15,6 @@ const PORT = 5000
 export async function fetchLogin(data: FormData) {
 	// const PORT = import.meta.env.VITE_PORT
 
-	console.log({ PORT })
 	const response = await fetch(`http://localhost:${PORT}/api/user`, {
 		method: 'POST',
 		headers: {
