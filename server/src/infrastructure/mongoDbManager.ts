@@ -1,5 +1,5 @@
 import { UserInterface } from "../application/UserInterface";
-import { MongoUserType, User } from "../domain/User";
+import { MongoUserType, User, IRoom } from "../domain/User";
 import mongoose, { Model } from "mongoose";
 import { mongo } from "mongoose";
 
@@ -95,19 +95,12 @@ export class UserMongoDbManager implements UserInterface {
       return user;
     });
     return users;
+  }
 
-    // const players = playersFromDB.map((playerFromDB: MongoPlayerType) => {
-    //   const player = new Player(
-    //     playerFromDB.email,
-    //     playerFromDB.password,
-    //     playerFromDB.games,
-    //     playerFromDB.name,
-    //     playerFromDB._id
-    //   );
-    //   player.registrationDate = playerFromDB.registrationDate;
-    //   return player;
-    // });
-    // return new PlayerList(players);
+  async getRoomList(): Promise<IRoom[]> {
+    const rooms = await this.userDocument.find({}).select("rooms");
+    console.log({ rooms });
+    return rooms;
   }
 
   async addRoom(playerId: string, roomName: string): Promise<Partial<User>> {

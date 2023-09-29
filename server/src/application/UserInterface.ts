@@ -1,4 +1,4 @@
-import { User } from "../domain/User";
+import { User, IRoom } from "../domain/User";
 
 export interface UserInterface {
   createUser(user: User): Promise<string>; // return user_id
@@ -8,6 +8,7 @@ export interface UserInterface {
   // deleteAllGames(playerDetails: Player): Promise<boolean>;
   findUserById(userId: string): Promise<User>;
   getUserList(): Promise<Array<User>>;
+  getRoomList(): Promise<Array<IRoom>>;
   // getPlayerList(): Promise<PlayerList>;
   // getGames(playerId: string): Promise<Array<GameType>>;
 }

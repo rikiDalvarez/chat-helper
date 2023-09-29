@@ -1,4 +1,4 @@
-import { User } from "../domain/User";
+import { User, IRoom } from "../domain/User";
 import { UserInterface } from "./UserInterface";
 
 /*
@@ -30,6 +30,9 @@ export class UserService {
 
   getUserList(): Promise<Array<User>> {
     return this.userInterface.getUserList();
+  }
+  getRoomList(): Promise<Array<IRoom>> {
+    return this.userInterface.getRoomList();
   }
 
   async addRoom(userId: string, roomName: string): Promise<Partial<User>> {

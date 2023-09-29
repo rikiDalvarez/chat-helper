@@ -7,6 +7,7 @@ import {
   loginHandle,
   createRoom,
   getUserList,
+  getRoomList,
 } from "./application/controller";
 // import authenticate from "./infrastructure/middleware/auth";
 
@@ -16,5 +17,6 @@ router.post("/newUser", createUser);
 router.post("/user", loginHandle);
 router.put("/newRoom", auth, createRoom);
 router.get("/users", auth, getUserList);
+router.get("/rooms", auth, getRoomList);
 
 export default router;

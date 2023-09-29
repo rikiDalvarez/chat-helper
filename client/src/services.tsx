@@ -58,6 +58,16 @@ export const fetchUserList = async (token: string | null) => {
 	return response
 }
 
+export const fetchRooms = async (token: string | null) => {
+	const response = await fetch(`http://localhost:${PORT}/api/rooms`, {
+		method: "GET",
+		headers: {
+			Authorization: `Bearer ${token}`,
+		}
+	})
+	return response
+}
+
 export const fetchGetWinner = async (token: string | null) => {
 	const response = await fetch(`http://localhost:${PORT}/api/ranking/winner`, {
 		method: "GET",

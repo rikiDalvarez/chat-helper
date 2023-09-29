@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { CreateRoom } from '../components/CreateRoom';
-import { fetchUserList } from '../services';
+import { fetchUserList, fetchRooms } from '../services';
 
 interface IRoom {
 	roomName: string;
@@ -23,6 +23,24 @@ const Dashboard: React.FC = () => {
 			if (response.ok) {
 				const responseData = await response.json();
 				console.log(responseData)
+				return responseData
+			} else {
+				console.error("fetching games");
+			}
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
+	const getRoomList = async () => {
+		try {
+			const token = localStorage.getItem("token");
+			const response = await fetchRooms(token);
+			if (response.ok) {
+				const responseData = await response.json();
+				console.log(responseData)
+				setRooms(responseData)
+				return responseData
 			} else {
 				console.error("fetching games");
 			}
@@ -32,7 +50,9 @@ const Dashboard: React.FC = () => {
 	}
 
 	useEffect(() => {
-		getUserList()
+		getRoomList();
+
+
 	}
 		, [])
 

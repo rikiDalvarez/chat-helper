@@ -88,6 +88,24 @@ export const getUserList = async (
       //return res.status(404).json({ error: err.message, error_code: "GP001" });
     });
 };
+export const getRoomList = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  userService
+    .getRoomList()
+    .then((rooms) => {
+      if (rooms) {
+        return res.status(200).json(rooms);
+      }
+    })
+    .catch((err) => {
+      next(err);
+      //in which scenario we will return this and what will be err.message???
+      //return res.status(404).json({ error: err.message, error_code: "GP001" });
+    });
+};
 
 //   const postPlayer = async (
 //     req: Request,
