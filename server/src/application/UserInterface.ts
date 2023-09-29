@@ -7,6 +7,7 @@ export interface UserInterface {
   addRoom(userId: string, roomName: string): Promise<Partial<User>>;
   // deleteAllGames(playerDetails: Player): Promise<boolean>;
   findUserById(userId: string): Promise<User>;
+  getUserList(): Promise<Array<User>>;
   // getPlayerList(): Promise<PlayerList>;
   // getGames(playerId: string): Promise<Array<GameType>>;
 }

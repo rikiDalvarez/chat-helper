@@ -1,12 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CreateRoom } from '../components/CreateRoom';
+import { fetchUserList } from '../services';
+
+interface IRoom {
+	roomName: string;
+	roomMembers: string[];
+	roomMessages: string[];
+}
 
 const Dashboard: React.FC = () => {
+	const [rooms, setRooms] = useState<IRoom[]>([])
 	const [createRoom, setCreateRoom] = useState(false);
 
 	const handleCreateRoom = () => {
 		setCreateRoom((createRoom) => (!createRoom));
 	}
+
+	const getUserList = async () => {
+		try {
+			const token = localStorage.getItem("token");
+			const response = await fetchUserList(token);
+			if (response.ok) {
+				const responseData = await response.json();
+				console.log(responseData)
+			} else {
+				console.error("fetching games");
+			}
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
+	useEffect(() => {
+		getUserList()
+	}
+		, [])
 
 	return (
 		<div className="dashboard flex flex-row">
@@ -27,20 +55,7 @@ const Dashboard: React.FC = () => {
 						</div>
 						<button>jOIN CHAT</button>
 					</div>
-					<div className="rooms m-4 w-64">
-						<p>#Topic</p>
-						<div className=" m-4">
-							<img src="/kandinsky.png" alt="" />
-						</div>
-						<button>jOIN CHAT</button>
-					</div>
-					<div className="rooms m-4 w-64">
-						<p>#Topic</p>
-						<div className=" m-4">
-							<img src="/kandinsky.png" alt="" />
-						</div>
-						<button>jOIN CHAT</button>
-					</div>
+
 				</div>
 			</div>
 		</div>

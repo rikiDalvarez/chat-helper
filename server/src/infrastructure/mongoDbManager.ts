@@ -4,10 +4,10 @@ import mongoose, { Model } from "mongoose";
 import { mongo } from "mongoose";
 
 export class UserMongoDbManager implements UserInterface {
-  private playerDocument: Model<MongoUserType>;
+  private userDocument: Model<MongoUserType>;
 
-  constructor(playerDocument: Model<MongoUserType>) {
-    this.playerDocument = playerDocument;
+  constructor(userDocument: Model<MongoUserType>) {
+    this.userDocument = userDocument;
   }
 
   // createPlayerDoc(player: Player) {
@@ -39,7 +39,7 @@ export class UserMongoDbManager implements UserInterface {
       registrationDate: user.registrationDate,
     };
     try {
-      const playerFromDB = await this.playerDocument.create(newPlayer);
+      const playerFromDB = await this.userDocument.create(newPlayer);
       return playerFromDB.id;
     } catch (err) {
       if (err instanceof mongoose.Error.ValidationError) {
@@ -63,7 +63,7 @@ export class UserMongoDbManager implements UserInterface {
   }
 
   async findUserById(playerID: string): Promise<User> {
-    const userDetails = await this.playerDocument.findById(playerID);
+    const userDetails = await this.userDocument.findById(playerID);
     if (!userDetails) {
       throw new Error("PlayerNotFound");
     }
@@ -75,7 +75,7 @@ export class UserMongoDbManager implements UserInterface {
   }
 
   async findUserByEmail(playerEmail: string): Promise<User> {
-    const userDetails = await this.playerDocument.findOne({
+    const userDetails = await this.userDocument.findOne({
       email: playerEmail,
     });
     if (!userDetails) {
@@ -85,29 +85,37 @@ export class UserMongoDbManager implements UserInterface {
     return new User(name, email, password, rooms, id);
   }
 
-  // async getPlayerList(): Promise<PlayerList> {
-  //   const playersFromDB = await this.playerDocument.find({});
+  async getUserList(): Promise<User[]> {
+    const usersFromDB = await this.userDocument.find({});
+    console.log({ usersFromDB });
+    const users = usersFromDB.map((userFromDB) => {
+      const { name, email, password, rooms, id, registrationDate } = userFromDB;
+      const user = new User(name, email, password, rooms, id);
+      user.registrationDate = registrationDate;
+      return user;
+    });
+    return users;
 
-  //   const players = playersFromDB.map((playerFromDB: MongoPlayerType) => {
-  //     const player = new Player(
-  //       playerFromDB.email,
-  //       playerFromDB.password,
-  //       playerFromDB.games,
-  //       playerFromDB.name,
-  //       playerFromDB._id
-  //     );
-  //     player.registrationDate = playerFromDB.registrationDate;
-  //     return player;
-  //   });
-  //   return new PlayerList(players);
-  // }
+    // const players = playersFromDB.map((playerFromDB: MongoPlayerType) => {
+    //   const player = new Player(
+    //     playerFromDB.email,
+    //     playerFromDB.password,
+    //     playerFromDB.games,
+    //     playerFromDB.name,
+    //     playerFromDB._id
+    //   );
+    //   player.registrationDate = playerFromDB.registrationDate;
+    //   return player;
+    // });
+    // return new PlayerList(players);
+  }
 
   async addRoom(playerId: string, roomName: string): Promise<Partial<User>> {
     try {
       let userOld = await this.findUserById(playerId);
 
       const room = { name: roomName, participants: [playerId], messages: [] };
-      const user = await this.playerDocument.findByIdAndUpdate(playerId, {
+      const user = await this.userDocument.findByIdAndUpdate(playerId, {
         rooms: [...userOld.rooms, room],
       });
       if (!user) {
@@ -125,7 +133,7 @@ export class UserMongoDbManager implements UserInterface {
 
   // async addGame(player: Player): Promise<GameType> {
   //   const id = player.id;
-  //   const response = await this.playerDocument.replaceOne(
+  //   const response = await this.userDocument.replaceOne(
   //     { _id: { $eq: id } },
   //     this.createPlayerDoc(player)
   //   );

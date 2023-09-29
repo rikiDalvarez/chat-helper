@@ -28,6 +28,10 @@ export class UserService {
     return this.userInterface.findUserByEmail(userEmail);
   }
 
+  getUserList(): Promise<Array<User>> {
+    return this.userInterface.getUserList();
+  }
+
   async addRoom(userId: string, roomName: string): Promise<Partial<User>> {
     return this.userInterface.addRoom(userId, roomName);
   }

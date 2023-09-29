@@ -48,12 +48,11 @@ export const postRoom = async (token: string | null, data: object) => {
 	return response;
 }
 
-export const fetchGameList = async (token: string | null, id: string | null) => {
-	const response = await fetch(`http://localhost:${PORT}/api/games/${id}`, {
+export const fetchUserList = async (token: string | null) => {
+	const response = await fetch(`http://localhost:${PORT}/api/users`, {
 		method: "GET",
 		headers: {
 			Authorization: `Bearer ${token}`,
-
 		}
 	})
 	return response

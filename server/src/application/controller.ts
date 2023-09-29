@@ -70,24 +70,24 @@ export const createRoom = async (
   }
 };
 
-//   const getPlayers = async (
-//     req: Request,
-//     res: Response,
-//     next: NextFunction
-//   ) => {
-//     playerService
-//       .getPlayerList()
-//       .then((players) => {
-//         if (players) {
-//           return res.status(200).json(players);
-//         }
-//       })
-//       .catch((err) => {
-//         next(err);
-//         //in which scenario we will return this and what will be err.message???
-//         //return res.status(404).json({ error: err.message, error_code: "GP001" });
-//       });
-//   };
+export const getUserList = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  userService
+    .getUserList()
+    .then((users) => {
+      if (users) {
+        return res.status(200).json(users);
+      }
+    })
+    .catch((err) => {
+      next(err);
+      //in which scenario we will return this and what will be err.message???
+      //return res.status(404).json({ error: err.message, error_code: "GP001" });
+    });
+};
 
 //   const postPlayer = async (
 //     req: Request,
