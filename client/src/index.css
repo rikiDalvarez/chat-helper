@@ -202,5 +202,8 @@ button:focus-visible {
   margin-bottom: 0.5rem;
 }
 
+.left-col {
+  min-width: 210px;
+}
 
 

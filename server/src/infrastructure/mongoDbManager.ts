@@ -104,19 +104,18 @@ export class UserMongoDbManager implements UserInterface {
     // Use the filter method to keep only objects with unique 'name' values
     const onlyRooms = rooms.map((room) => room.rooms).flat();
     console.log({ onlyRooms });
-    const uniqueRoomsToSend = [];
 
     const uniqueRooms = onlyRooms.filter((room) => {
       console.log({ room });
       if (!uniqueNames.has(room.name)) {
         uniqueNames.add(room.name);
-        uniqueRoomsToSend.push(room);
+
         return true;
       }
       return false;
     });
-
-    return uniqueRoomsToSend;
+    console.log({ uniqueRooms });
+    return uniqueRooms;
   }
 
   async addRoom(playerId: string, roomName: string): Promise<Partial<User>> {
