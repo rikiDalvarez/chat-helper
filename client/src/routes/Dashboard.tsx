@@ -20,7 +20,6 @@ const Dashboard: React.FC = () => {
 		const searchText = event.target.value.toLowerCase();
 		setFilterText(searchText);
 
-		// Filter the rooms based on the input text
 		const filtered = rooms.filter((room) =>
 			room.name.toLowerCase().includes(searchText)
 		);
