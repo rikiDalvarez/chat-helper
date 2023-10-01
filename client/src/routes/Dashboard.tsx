@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { CreateRoom } from '../components/CreateRoom';
 import { fetchUserList, fetchRooms } from '../services';
+import { useNavigate } from 'react-router-dom';
 
 interface IRoom {
 	name: string;
@@ -14,7 +15,11 @@ const Dashboard: React.FC = () => {
 	const [filterText, setFilterText] = useState("");
 	const [filteredRooms, setFilteredRooms] = useState<IRoom[]>(rooms);
 
+	const navigate = useNavigate();
 
+	const navigateToChatRoom = () => {
+		navigate("/api/chatroom")
+	}
 
 	const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const searchText = event.target.value.toLowerCase();
@@ -45,6 +50,7 @@ const Dashboard: React.FC = () => {
 			console.error(error)
 		}
 	}
+	console.log(getUserList)
 
 	const getRoomList = async () => {
 		try {
@@ -84,7 +90,7 @@ const Dashboard: React.FC = () => {
 			</div>
 			<div className="main-col flex flex-col shadow-lg rounded-lg">
 				<label htmlFor="filter">
-					<input className='p-2 m-6 border-2 rounded-lg' id="filter" type="text" placeholder='search for a chatroom by topic' value={filterText}
+					<input className='p-2 m-6 border-2 rounded-lg' id="filter" type="text" placeholder='search by topic' value={filterText}
 						onChange={handleFilterChange} />
 				</label>
 				<div className="chat-rooms flex flex-row flex-wrap justify-center">
@@ -94,7 +100,7 @@ const Dashboard: React.FC = () => {
 							<div className=" m-4">
 								<img src="/kandinsky.png" alt="" />
 							</div>
-							<button>JOIN CHAT</button>
+							<button onClick={navigateToChatRoom}>JOIN CHAT</button>
 						</div>
 					))}
 				</div>
