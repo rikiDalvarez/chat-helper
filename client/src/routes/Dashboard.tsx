@@ -11,6 +11,21 @@ interface IRoom {
 const Dashboard: React.FC = () => {
 	const [rooms, setRooms] = useState<IRoom[]>([])
 	const [createRoom, setCreateRoom] = useState(false);
+	const [filterText, setFilterText] = useState("");
+	const [filteredRooms, setFilteredRooms] = useState<IRoom[]>(rooms);
+
+
+
+	const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const searchText = event.target.value.toLowerCase();
+		setFilterText(searchText);
+
+		// Filter the rooms based on the input text
+		const filtered = rooms.filter((room) =>
+			room.name.toLowerCase().includes(searchText)
+		);
+		setFilteredRooms(filtered);
+	};
 
 	const handleCreateRoom = () => {
 		setCreateRoom((createRoom) => (!createRoom));
@@ -52,12 +67,13 @@ const Dashboard: React.FC = () => {
 	//TODO add emit when add room to send back rooms state
 
 	useEffect(() => {
+
 		getRoomList();
 	}
 		, [])
 
 	useEffect(() => {
-		console.log("Rooms have changed:", rooms);
+		setFilteredRooms(rooms);
 	}, [rooms]);
 
 	return (
@@ -69,10 +85,11 @@ const Dashboard: React.FC = () => {
 			</div>
 			<div className="main-col flex flex-col shadow-lg rounded-lg">
 				<label htmlFor="filter">
-					<input className='p-2 m-6 border-2  rounded-lg' id="filter" type="text" placeholder='search for a chatroom' />
+					<input className='p-2 m-6 border-2 rounded-lg' id="filter" type="text" placeholder='search for a chatroom by topic' value={filterText}
+						onChange={handleFilterChange} />
 				</label>
 				<div className="chat-rooms flex flex-row flex-wrap justify-center">
-					{rooms.map((room, index) => (
+					{filteredRooms.map((room, index) => (
 						<div key={index} className="rooms m-4 w-64">
 							<p>{`#${room.name}`}</p>
 							<div className=" m-4">
@@ -81,14 +98,6 @@ const Dashboard: React.FC = () => {
 							<button>JOIN CHAT</button>
 						</div>
 					))}
-					<div className="rooms m-4 w-64">
-						<p>#Topic</p>
-						<div className=" m-4">
-							<img src="/kandinsky.png" alt="" />
-						</div>
-						<button>jOIN CHAT</button>
-					</div>
-
 				</div>
 			</div>
 		</div>
