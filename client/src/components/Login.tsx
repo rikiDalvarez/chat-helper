@@ -83,7 +83,7 @@ const Login: React.FC = () => {
         </label>
         <br />
         <button type="submit" className="p-2 m-2">Login</button>
-        <GoogleButton style={{ margin: 'auto', }} onClick={() => { console.log("works") }} />
+        <div className=" m-4"><GoogleButton style={{ margin: 'auto', }} onClick={() => { console.log("works") }} /></div>
       </form>
 
     </div>
