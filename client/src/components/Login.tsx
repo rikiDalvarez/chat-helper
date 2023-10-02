@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchLogin } from "../services";
 import jwt_decode from "jwt-decode";
 import socket from '../socketService';
+import GoogleButton from 'react-google-button';
 
 interface IForm {
   email: string,
@@ -69,7 +70,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="login bg-rose-50  rounded-lg m-4 border-2 shadow-xl flex flex-col items-center min">
+    <div className="login bg-rose-50  rounded-lg m-4 border-2 shadow-xl flex flex-col items-center justify-center min">
       <button onClick={navigateChat} className="p-2 m-4 bg-pink-400">Talk right now</button>
       <h1 className='m-2 text-4xl p-2'>Login</h1>
       <button className="p-2 m-2" onClick={navigateRegistration} >New user? register</button>
@@ -78,10 +79,11 @@ const Login: React.FC = () => {
           <input className='p-2 m-2 border-2  rounded-lg' id="email" type="text" placeholder='email' name="email" onChange={handleChange} />
         </label>
         <label htmlFor="password">
-          <input className='p-2 m-2 border-2  rounded-lg' id="pssword" type="password" placeholder='passworld' name="password" onChange={handleChange} />
+          <input className='p-2 m-2 border-2  rounded-lg' id="password" type="password" placeholder='passworld' name="password" onChange={handleChange} />
         </label>
         <br />
         <button type="submit" className="p-2 m-2">Login</button>
+        <GoogleButton style={{ margin: 'auto', }} onClick={() => { console.log("works") }} />
       </form>
 
     </div>
