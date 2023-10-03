@@ -4,6 +4,7 @@ import { fetchLogin } from "../services";
 import jwt_decode from "jwt-decode";
 import socket from '../socketService';
 import GoogleButton from 'react-google-button';
+import getGoogleOauthUrl from '../utils/getGoogleUrl';
 
 interface IForm {
   email: string,
@@ -32,6 +33,11 @@ const Login: React.FC = () => {
     }))
 
   }
+
+  const handleGoogleButtonClick = () => {
+    const googleOauthUrl = getGoogleOauthUrl(); 
+    window.location.href = googleOauthUrl; 
+  };
 
   const navigateRegistration = () => {
     navigate("/register");
@@ -83,7 +89,8 @@ const Login: React.FC = () => {
         </label>
         <br />
         <button type="submit" className="p-2 m-2">Login</button>
-        <div className=" m-4"><GoogleButton style={{ margin: 'auto', }} onClick={() => { console.log("works") }} /></div>
+        <div className=" m-4"><GoogleButton style={{ margin: 'auto', }} onClick={handleGoogleButtonClick} /></div>
+        
       </form>
 
     </div>
