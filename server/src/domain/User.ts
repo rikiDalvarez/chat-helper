@@ -9,7 +9,7 @@ export type MongoUserType = {
   registrationDate: Date;
 };
 
-interface IRoom {
+export interface IRoom {
   name: string;
   participants: Array<User>;
   messages: Array<IMessage>;

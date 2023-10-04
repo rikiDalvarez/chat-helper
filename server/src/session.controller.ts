@@ -2,9 +2,18 @@ import { Request, Response } from "express";
 import "dotenv/config";
 import qs from "qs"
 import config from "../config/config";
+import jwt from "jsonwebtoken"
 
-async function getGoogleOauthTokens({code}: {code: string}){
-    const url = "http://oauth2/googleapis.com/token";
+interface GoogleTokenResult {
+    access_token: string;
+    expires_in: Number;
+    refresh_token: string;
+    scope: string;
+    id_token: string;
+}
+
+async function getGoogleOauthTokens({code}: {code: string}): Promise<GoogleTokenResult> {
+    const url = "https://oauth2.googleapis.com/token";
     const values = {
         code,
         client_id: config.GOOGLE_CLIENT_ID,
@@ -20,17 +29,25 @@ async function getGoogleOauthTokens({code}: {code: string}){
             },
             body: qs.stringify(values)
             })
-            return res
+            
+            return await res.json()
     } catch (error: any) {
         console.error(error, "failed to fetch google oauth tokens")
         throw new Error(error.message)
     }
-return {code: "a"}
 }
 
 export async function googleOauthHandler(req: Request, res:Response){
-    const code = req.query.code as string;
-    const {id_token, access_token} = await getGoogleOauthTokens({code})
+    try {
+        const code = req.query.code as string;
+        const {id_token, access_token} = await getGoogleOauthTokens({code})
+        console.log(id_token, access_token)
+        const googleUser = jwt.decode(id_token)
+        console.log({googleUser})
+        
+    } catch (error) {
+        console.error(error, "failed to authorize google user");
+        return res.redirect("http://localhost:5173/oauth/error")
+    }
 
-   
 }
