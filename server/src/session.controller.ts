@@ -3,6 +3,7 @@ import "dotenv/config";
 import qs from "qs"
 import config from "../config/config";
 import jwt from "jsonwebtoken"
+import { userService } from "./initDB";
 
 interface GoogleTokenResult {
     access_token: string;
@@ -21,6 +22,7 @@ async function getGoogleOauthTokens({code}: {code: string}): Promise<GoogleToken
         redirect_uri: config.GOOGLE_OAUTH_REDIRECT_URL,
         grant_type: "authorization_code"
     };
+    console.log(values)
     try {
         const res = await fetch(url, {
             method: 'POST',
@@ -47,6 +49,21 @@ export async function googleOauthHandler(req: Request, res:Response){
         if (!googleUser.email_verified){
             return  res.status(403).send("google account is not verified")
         }
+        if (googleUser == null) { return res.status(403).send("userNotFound")}
+       const user = await userService.findUserByEmail(googleUser.email)
+       console.log({user})
+
+       const payload = {
+        userId: user.id,
+        userName: user.name,
+        userEmail: user.email,
+      };
+
+      const token = jwt.sign(payload, config.JWT_SECRET, {
+        expiresIn: "600s",
+      });
+      return res.redirect("http://localhost:5173/api/dashboard")
+
         
     } catch (error) {
         console.error(error, "failed to authorize google user");
