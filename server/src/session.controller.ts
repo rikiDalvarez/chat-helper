@@ -43,9 +43,7 @@ export async function googleOauthHandler(req: Request, res:Response){
     try {
         const code = req.query.code as string;
         const {id_token, access_token} = await getGoogleOauthTokens({code})
-        console.log(id_token, "--",access_token)
         const googleUser = jwt.decode(id_token)
-        console.log({googleUser})
         if (!googleUser.email_verified){
             return  res.status(403).send("google account is not verified")
         }
@@ -62,6 +60,9 @@ export async function googleOauthHandler(req: Request, res:Response){
       const token = jwt.sign(payload, config.JWT_SECRET, {
         expiresIn: "600s",
       });
+      //TODO extract cookie on front end or send on the url on redirect and extract
+      res.cookie("authToken", token, { httpOnly: true, secure: true });
+
       return res.redirect("http://localhost:5173/api/dashboard")
 
         
