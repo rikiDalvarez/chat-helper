@@ -20,7 +20,6 @@ export const CreateRoom: React.FC<createRoomProps> = ({ setCreateRoom }) => {
 		event.preventDefault();
 		try {
 			const id = localStorage.getItem("id");
-			console.log({ id })
 			const data = { id, roomName: formData }
 			const response = await postRoom(token, data)
 			console.log("response:", response)
