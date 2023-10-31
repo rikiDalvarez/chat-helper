@@ -5,6 +5,8 @@ import config from "../config/config";
 import jwt from "jsonwebtoken";
 import { userService } from "./initDB";
 
+//TODO auth not working
+
 interface GoogleTokenResult {
   access_token: string;
   expires_in: Number;
